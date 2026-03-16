@@ -113,44 +113,44 @@ const Navbar = ({ isPlaying, onPlay, onPause }) => {
             borderRadius: '16px',
           }}
         >
-          <a 
-            href="#home" 
-            onClick={(e) => handleClick(e, '#home')} 
-            className="group relative"
-            onMouseEnter={() => setIsHovering(true)}
-            onMouseLeave={() => setIsHovering(false)}
-          >
-
-            <div className="relative h-5 w-24">
-              <span 
-                className="absolute inset-0 text-sm font-medium block transition-all duration-700"
-                style={{ 
-                  color: '#fafafa',
-                  fontFamily: '"Space Mono", monospace',
-                  letterSpacing: '0.05em',
-                  transform: isHovering ? 'translateY(-120%)' : 'translateY(0)',
-                  opacity: isHovering ? 0 : 1,
-                }}
-              >
-                CORTISOL
-              </span>
-              <span 
-                className="absolute inset-0 text-sm font-medium block transition-all duration-700"
-                style={{ 
-                  color: '#14b8a6',
-                  fontFamily: '"Space Mono", monospace',
-                  letterSpacing: '0.05em',
-                  transform: isHovering ? 'translateY(0)' : 'translateY(120%)',
-                  opacity: isHovering ? 1 : 0,
-                }}
-              >
-                {marketCap}
-              </span>
-            </div>
+          <div className="flex items-center gap-2">
+            <a 
+              href="#home" 
+              onClick={(e) => handleClick(e, '#home')} 
+              className="group relative"
+              onMouseEnter={() => setIsHovering(true)}
+              onMouseLeave={() => setIsHovering(false)}
+            >
+              <div className="relative h-5 w-24">
+                <span 
+                  className="absolute inset-0 text-sm font-medium block transition-all duration-700"
+                  style={{ 
+                    color: '#fafafa',
+                    fontFamily: '"Space Mono", monospace',
+                    letterSpacing: '0.05em',
+                    transform: isHovering ? 'translateY(-120%)' : 'translateY(0)',
+                    opacity: isHovering ? 0 : 1,
+                  }}
+                >
+                  CORTISOL
+                </span>
+                <span 
+                  className="absolute inset-0 text-sm font-medium block transition-all duration-700"
+                  style={{ 
+                    color: '#14b8a6',
+                    fontFamily: '"Space Mono", monospace',
+                    letterSpacing: '0.05em',
+                    transform: isHovering ? 'translateY(0)' : 'translateY(120%)',
+                    opacity: isHovering ? 1 : 0,
+                  }}
+                >
+                  {marketCap}
+                </span>
+              </div>
             </a>
             
             <div 
-              className="relative mr-2 flex items-center gap-1.5 px-3 py-1.5 rounded-lg overflow-hidden cursor-pointer transition-all duration-300"
+              className="relative flex items-center gap-1.5 px-3 py-1.5 rounded-lg overflow-hidden cursor-pointer transition-all duration-300"
               onMouseEnter={handleMusicEnter}
               onMouseLeave={handleMusicLeave}
               style={{
@@ -189,29 +189,31 @@ const Navbar = ({ isPlaying, onPlay, onPause }) => {
                 vibe
               </span>
             </div>
+          </div>
 
           <div className="hidden md:flex items-center gap-1">
             {navLinks.map((link) => (
-                  fill="none" 
-                  viewBox="0 0 24 24" 
-                  stroke="currentColor" 
-                  strokeWidth="2"
-                >
-                  <path strokeLinecap="round" strokeLinejoin="round" d="M9 19V6l12-3v13M9 19c0 1.105-1.343 2-3 2s-3-.895-3-2 1.343-2 3-2 3 .895 3 2zm12-3c0 1.105-1.343 2-3 2s-3-.895-3-2 1.343-2 3-2 3 .895 3 2zM9 10l12-3" />
-                </svg>
-              )}
-              <span 
-                className="text-xs overflow-hidden transition-all duration-300"
+              <a
+                key={link.href}
+                href={link.href}
+                onClick={(e) => handleClick(e, link.href)}
+                className="relative px-4 py-1.5 text-xs rounded-lg overflow-hidden"
                 style={{ 
+                  color: activeSection === link.href.slice(1) ? '#ffffff' : 'rgba(255,255,255,0.4)',
                   fontFamily: '"Space Mono", monospace',
-                  color: isPlaying ? '#2dd4bf' : 'rgba(255,255,255,0.5)',
-                  width: musicHover || isPlaying ? '36px' : '0',
-                  opacity: musicHover || isPlaying ? 1 : 0,
                 }}
               >
-                vibe
-              </span>
-            </div>
+                <span 
+                  className="absolute inset-0 rounded-lg transition-all duration-700 ease-out"
+                  style={{
+                    background: 'rgba(255, 255, 255, 0.08)',
+                    opacity: activeSection === link.href.slice(1) ? 1 : 0,
+                  }}
+                />
+                <span className="relative z-10">{link.label}</span>
+              </a>
+            ))}
+          </div>
 
           <button
             className="md:hidden p-1.5 rounded-lg"
