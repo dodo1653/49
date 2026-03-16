@@ -41,57 +41,45 @@ function App() {
     }
   }, [])
 
-  useEffect(() => {
-    if (audioRef.current) {
-      audioRef.current.volume = 0
-      audioRef.current.play().then(() => {
-        setIsPlaying(true)
-        let vol = 0
-        const fadeIn = () => {
-          vol += 0.015
-          if (audioRef.current && vol < 0.5) {
-            audioRef.current.volume = vol
-            requestAnimationFrame(fadeIn)
-          }
-        }
-        fadeIn()
-      }).catch(() => {})
-    }
-  }, [])
-
-  const toggleAudio = () => {
+  const playAudio = () => {
     if (!audioRef.current) return
-    
-    const targetPlaying = !isPlaying
-    
-    if (targetPlaying) {
-      audioRef.current.volume = 0
-      audioRef.current.play().then(() => {
-        setIsPlaying(true)
-        let vol = 0
-        const fadeIn = () => {
-          vol += 0.015
-          if (audioRef.current && vol < 0.5) {
-            audioRef.current.volume = vol
-            requestAnimationFrame(fadeIn)
-          }
-        }
-        fadeIn()
-      }).catch(() => {})
-    } else {
-      setIsPlaying(false)
-      let vol = audioRef.current.volume
-      const fadeOut = () => {
-        vol -= 0.015
-        if (audioRef.current && vol > 0) {
+    audioRef.current.volume = 0
+    audioRef.current.play().then(() => {
+      setIsPlaying(true)
+      let vol = 0
+      const fadeIn = () => {
+        vol += 0.015
+        if (audioRef.current && vol < 0.5) {
           audioRef.current.volume = vol
-          requestAnimationFrame(fadeOut)
-        } else if (audioRef.current) {
-          audioRef.current.pause()
-          audioRef.current.volume = 0
+          requestAnimationFrame(fadeIn)
         }
       }
-      fadeOut()
+      fadeIn()
+    }).catch(() => {})
+  }
+
+  const pauseAudio = () => {
+    if (!audioRef.current) return
+    setIsPlaying(false)
+    let vol = audioRef.current.volume
+    const fadeOut = () => {
+      vol -= 0.015
+      if (audioRef.current && vol > 0) {
+        audioRef.current.volume = vol
+        requestAnimationFrame(fadeOut)
+      } else if (audioRef.current) {
+        audioRef.current.pause()
+        audioRef.current.volume = 0
+      }
+    }
+    fadeOut()
+  }
+
+  const toggleAudio = () => {
+    if (isPlaying) {
+      pauseAudio()
+    } else {
+      playAudio()
     }
   }
 
@@ -99,46 +87,8 @@ function App() {
     <div className="min-h-screen">
       <audio ref={audioRef} src="/tiktok-audio.mp3" preload="auto" loop />
       
-      <button
-        onClick={toggleAudio}
-        className="fixed z-50 flex items-center gap-2 px-4 py-3 rounded-full transition-all duration-500"
-        style={{
-          top: '50%',
-          left: '1.5rem',
-          transform: 'translateY(-50%)',
-          background: isPlaying ? 'rgba(20, 184, 166, 0.15)' : 'rgba(255,255,255,0.05)',
-          border: '1px solid rgba(20, 184, 166, 0.3)',
-          backdropFilter: 'blur(12px)',
-        }}
-      >
-        <div className="relative flex items-center justify-center w-5 h-5">
-          {isPlaying ? (
-            <div className="flex gap-[2px] items-end h-4">
-              <span className="w-[2px] bg-teal-400 rounded-full animate-equalizer" style={{ height: '40%', animationDelay: '0ms' }} />
-              <span className="w-[2px] bg-teal-400 rounded-full animate-equalizer" style={{ height: '70%', animationDelay: '150ms' }} />
-              <span className="w-[2px] bg-teal-400 rounded-full animate-equalizer" style={{ height: '50%', animationDelay: '300ms' }} />
-              <span className="w-[2px] bg-teal-400 rounded-full animate-equalizer" style={{ height: '80%', animationDelay: '450ms' }} />
-            </div>
-          ) : (
-            <svg className="w-4 h-4 text-teal-400" fill="currentColor" viewBox="0 0 24 24">
-              <path d="M8 5v14l11-7z" />
-            </svg>
-          )}
-        </div>
-        <span 
-          className="text-xs font-light text-teal-400 overflow-hidden transition-all duration-300" 
-          style={{ 
-            fontFamily: '"Space Mono", monospace', 
-            width: isPlaying ? '50px' : '45px',
-            opacity: isPlaying ? 1 : 0.6
-          }}
-        >
-          {isPlaying ? 'playing' : 'paused'}
-        </span>
-      </button>
-
       <CinematicTransition />
-      <Navbar />
+      <Navbar isPlaying={isPlaying} onPlay={playAudio} onPause={pauseAudio} />
       <Hero />
       <Art />
       <LiveSection />
