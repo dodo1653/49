@@ -60,30 +60,33 @@ function App() {
   }, [])
 
   const toggleAudio = () => {
-    if (audioRef.current) {
-      if (isPlaying) {
-        const fadeOut = setInterval(() => {
-          if (audioRef.current && audioRef.current.volume > 0) {
-            audioRef.current.volume = Math.max(0, audioRef.current.volume - 0.05)
-          } else {
-            clearInterval(fadeOut)
-            audioRef.current.pause()
+    if (!audioRef.current) return
+    
+    const targetPlaying = !isPlaying
+    
+    if (targetPlaying) {
+      audioRef.current.volume = 0
+      audioRef.current.play().then(() => {
+        setIsPlaying(true)
+        const fadeIn = () => {
+          if (audioRef.current && audioRef.current.volume < 0.5) {
+            audioRef.current.volume = Math.min(0.5, audioRef.current.volume + 0.08)
+            requestAnimationFrame(fadeIn)
           }
-        }, 150)
-        setIsPlaying(false)
-      } else {
-        audioRef.current.volume = 0
-        audioRef.current.play().then(() => {
-          setIsPlaying(true)
-          const fadeInInterval = setInterval(() => {
-            if (audioRef.current && audioRef.current.volume < 0.5) {
-              audioRef.current.volume = Math.min(0.5, audioRef.current.volume + 0.05)
-            } else {
-              clearInterval(fadeInInterval)
-            }
-          }, 150)
-        }).catch(() => {})
+        }
+        fadeIn()
+      }).catch(() => {})
+    } else {
+      setIsPlaying(false)
+      const fadeOut = () => {
+        if (audioRef.current && audioRef.current.volume > 0) {
+          audioRef.current.volume = Math.max(0, audioRef.current.volume - 0.08)
+          requestAnimationFrame(fadeOut)
+        } else if (audioRef.current) {
+          audioRef.current.pause()
+        }
       }
+      fadeOut()
     }
   }
 
@@ -93,7 +96,7 @@ function App() {
       
       <button
         onClick={toggleAudio}
-        className="fixed z-50 flex items-center gap-2 px-4 py-3 rounded-full transition-all duration-500"
+        className="fixed z-50 flex items-center gap-2 px-4 py-3 rounded-full transition-all duration-300"
         style={{
           top: '50%',
           left: '1.5rem',
@@ -112,15 +115,20 @@ function App() {
               <span className="w-[2px] bg-teal-400 rounded-full animate-equalizer" style={{ height: '80%', animationDelay: '450ms' }} />
             </div>
           ) : (
-            <svg className="w-4 h-4 text-teal-400 transition-transform duration-300" fill="currentColor" viewBox="0 0 24 24">
+            <svg className="w-4 h-4 text-teal-400" fill="currentColor" viewBox="0 0 24 24">
               <path d="M8 5v14l11-7z" />
             </svg>
           )}
         </div>
-        <span className="text-xs font-light text-teal-400 overflow-hidden transition-all duration-500" style={{ fontFamily: '"Space Mono", monospace', width: isPlaying ? '50px' : '45px', opacity: 1 }}>
-          <span className={`inline-block transition-transform duration-500 ${isPlaying ? 'translate-y-0' : 'translate-y-0'}`}>
-            {isPlaying ? 'playing' : 'paused'}
-          </span>
+        <span 
+          className="text-xs font-light text-teal-400 overflow-hidden transition-all duration-200" 
+          style={{ 
+            fontFamily: '"Space Mono", monospace', 
+            width: isPlaying ? '50px' : '45px',
+            opacity: isPlaying ? 1 : 0.6
+          }}
+        >
+          {isPlaying ? 'playing' : 'paused'}
         </span>
       </button>
 
