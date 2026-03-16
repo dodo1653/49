@@ -64,12 +64,12 @@ function App() {
       if (isPlaying) {
         const fadeOut = setInterval(() => {
           if (audioRef.current && audioRef.current.volume > 0) {
-            audioRef.current.volume = Math.max(0, audioRef.current.volume - 0.1)
+            audioRef.current.volume = Math.max(0, audioRef.current.volume - 0.05)
           } else {
             clearInterval(fadeOut)
             audioRef.current.pause()
           }
-        }, 100)
+        }, 150)
         setIsPlaying(false)
       } else {
         audioRef.current.volume = 0
@@ -77,11 +77,11 @@ function App() {
           setIsPlaying(true)
           const fadeInInterval = setInterval(() => {
             if (audioRef.current && audioRef.current.volume < 0.5) {
-              audioRef.current.volume = Math.min(0.5, audioRef.current.volume + 0.1)
+              audioRef.current.volume = Math.min(0.5, audioRef.current.volume + 0.05)
             } else {
               clearInterval(fadeInInterval)
             }
-          }, 100)
+          }, 150)
         }).catch(() => {})
       }
     }
@@ -93,13 +93,14 @@ function App() {
       
       <button
         onClick={toggleAudio}
-        className="fixed z-50 flex items-center gap-2 px-3 py-2 rounded-full transition-all duration-300"
+        className="fixed z-50 flex items-center gap-2 px-4 py-3 rounded-full transition-all duration-500"
         style={{
-          bottom: '1.5rem',
-          right: '1.5rem',
-          background: isPlaying ? 'rgba(20, 184, 166, 0.15)' : 'rgba(255,255,255,0.05)',
-          border: '1px solid rgba(20, 184, 166, 0.3)',
-          backdropFilter: 'blur(10px)',
+          top: '50%',
+          left: '1.5rem',
+          transform: 'translateY(-50%)',
+          background: isPlaying ? 'rgba(20, 184, 166, 0.12)' : 'rgba(255,255,255,0.05)',
+          border: '1px solid rgba(20, 184, 166, 0.25)',
+          backdropFilter: 'blur(12px)',
         }}
       >
         <div className="relative flex items-center justify-center w-5 h-5">
@@ -111,13 +112,15 @@ function App() {
               <span className="w-[2px] bg-teal-400 rounded-full animate-equalizer" style={{ height: '80%', animationDelay: '450ms' }} />
             </div>
           ) : (
-            <svg className="w-4 h-4 text-teal-400" fill="currentColor" viewBox="0 0 24 24">
+            <svg className="w-4 h-4 text-teal-400 transition-transform duration-300" fill="currentColor" viewBox="0 0 24 24">
               <path d="M8 5v14l11-7z" />
             </svg>
           )}
         </div>
-        <span className="text-xs font-light text-teal-400" style={{ fontFamily: '"Space Mono", monospace' }}>
-          {isPlaying ? 'playing' : 'paused'}
+        <span className="text-xs font-light text-teal-400 overflow-hidden transition-all duration-500" style={{ fontFamily: '"Space Mono", monospace', width: isPlaying ? '50px' : '45px', opacity: 1 }}>
+          <span className={`inline-block transition-transform duration-500 ${isPlaying ? 'translate-y-0' : 'translate-y-0'}`}>
+            {isPlaying ? 'playing' : 'paused'}
+          </span>
         </span>
       </button>
 
