@@ -21,6 +21,10 @@ function App() {
     script.charset = 'utf-8'
     document.body.appendChild(script)
 
+    if (audioRef.current) {
+      audioRef.current.load()
+    }
+
     const lenis = new Lenis({
       duration: 1.2,
       easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
@@ -43,36 +47,17 @@ function App() {
 
   const playAudio = () => {
     if (!audioRef.current) return
-    audioRef.current.volume = 0.3
+    audioRef.current.volume = 0.5
     audioRef.current.play().then(() => {
       setIsPlaying(true)
-      let vol = 0.3
-      const fadeIn = () => {
-        vol += 0.04
-        if (audioRef.current && vol < 0.5) {
-          audioRef.current.volume = vol
-          requestAnimationFrame(fadeIn)
-        }
-      }
-      fadeIn()
     }).catch(() => {})
   }
 
   const pauseAudio = () => {
     if (!audioRef.current) return
     setIsPlaying(false)
-    let vol = audioRef.current.volume
-    const fadeOut = () => {
-      vol -= 0.06
-      if (audioRef.current && vol > 0) {
-        audioRef.current.volume = vol
-        requestAnimationFrame(fadeOut)
-      } else if (audioRef.current) {
-        audioRef.current.pause()
-        audioRef.current.volume = 0
-      }
-    }
-    fadeOut()
+    audioRef.current.pause()
+    audioRef.current.volume = 0
   }
 
   const toggleAudio = () => {
