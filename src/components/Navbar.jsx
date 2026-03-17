@@ -105,12 +105,12 @@ const Navbar = ({ isPlaying, onPlay, onPause }) => {
 
   return (
     <nav className="fixed top-0 left-0 right-0 z-50">
-      <div className="mx-auto max-w-3xl px-5 pt-5">
+      <div className="mx-auto max-w-xl px-4 pt-5">
         <div 
-          className="flex items-center justify-between px-6 py-2.5"
+          className="flex items-center justify-between px-4 py-2"
           style={{
             background: 'rgba(255, 255, 255, 0.06)',
-            borderRadius: '16px',
+            borderRadius: '14px',
           }}
         >
           <a 
