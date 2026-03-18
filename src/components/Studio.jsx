@@ -56,12 +56,15 @@ const Studio = () => {
   const drawCanvas = () => {
     const canvas = canvasRef.current
     const ctx = canvas.getContext('2d')
+    const container = containerRef.current
+    if (!container) return
     
     if (image.startsWith('data:image') || image.startsWith('blob:')) {
       const img = new Image()
       img.onload = () => {
-        const maxW = 800
-        const scale = Math.min(1, maxW / img.width)
+        const maxW = Math.min(img.width, container.clientWidth - 48)
+        const maxH = Math.min(img.height, 500)
+        const scale = Math.min(maxW / img.width, maxH / img.height, 1)
         canvas.width = img.width * scale
         canvas.height = img.height * scale
         ctx.drawImage(img, 0, 0, canvas.width, canvas.height)
@@ -72,8 +75,9 @@ const Studio = () => {
       const img = new Image()
       img.crossOrigin = 'anonymous'
       img.onload = () => {
-        const maxW = 800
-        const scale = Math.min(1, maxW / img.width)
+        const maxW = Math.min(img.width, container.clientWidth - 48)
+        const maxH = Math.min(img.height, 500)
+        const scale = Math.min(maxW / img.width, maxH / img.height, 1)
         canvas.width = img.width * scale
         canvas.height = img.height * scale
         ctx.drawImage(img, 0, 0, canvas.width, canvas.height)
@@ -310,7 +314,7 @@ const Studio = () => {
               animate={{ opacity: 1 }}
               className="flex-1 flex flex-col"
             >
-              <div className="flex-1 rounded-3xl bg-white/[0.02] border border-white/5 overflow-hidden flex items-center justify-center relative">
+              <div ref={containerRef} className="flex-1 rounded-3xl bg-white/[0.02] border border-white/5 overflow-hidden flex items-center justify-center relative p-6">
                 <canvas 
                   ref={canvasRef}
                   className="max-w-full max-h-full object-contain cursor-crosshair"
