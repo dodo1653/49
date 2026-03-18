@@ -4,7 +4,6 @@ import { WalletMultiButton } from '@solana/wallet-adapter-react-ui'
 import { motion, AnimatePresence } from 'framer-motion'
 import { PublicKey, VersionedTransaction } from '@solana/web3.js'
 import { Buffer } from 'buffer'
-import Navbar from './Navbar'
 
 const CORTISOL_TOKEN_ADDRESS = '9AyLH5Puifc7v9MkTgA36JabS4wiVTEZ3aEPeNoTpump'
 const SOL_MINT = 'So11111111111111111111111111111111111111112'
@@ -198,8 +197,6 @@ const Swap = () => {
 
   return (
     <div className="min-h-screen flex flex-col selection:bg-teal-500/30 relative" style={{ background: '#050505' }}>
-      <Navbar />
-      
       <div className="fixed inset-0 overflow-hidden">
         <div className="absolute inset-0" style={{ background: 'radial-gradient(ellipse at 30% 20%, rgba(20, 184, 166, 0.08) 0%, transparent 50%)' }} />
         <div className="absolute inset-0" style={{ background: 'radial-gradient(ellipse at 70% 80%, rgba(13, 148, 136, 0.05) 0%, transparent 50%)' }} />
