@@ -22,6 +22,7 @@ const Studio = () => {
 
   const assets = [
     { id: 'text', name: 'Text', icon: 'T', preview: null },
+    { id: 'gauge', name: 'Gauge', icon: '◠', preview: null },
   ]
 
   const assetImagesRef = useRef({})
@@ -125,6 +126,24 @@ const Studio = () => {
       ctx.strokeText(watermark.text, x, y)
       ctx.fillStyle = '#14b8a6'
       ctx.fillText(watermark.text, x, y)
+    } else if (selectedAsset === 'gauge') {
+      ctx.beginPath()
+      ctx.arc(x, y, size / 2, Math.PI, 0)
+      ctx.strokeStyle = '#14b8a6'
+      ctx.lineWidth = 6
+      ctx.stroke()
+      ctx.rotate(-Math.PI / 4)
+      ctx.beginPath()
+      ctx.moveTo(x, y)
+      ctx.lineTo(x, y - size / 2 + 8)
+      ctx.strokeStyle = '#fff'
+      ctx.lineWidth = 2
+      ctx.stroke()
+      ctx.rotate(Math.PI / 4)
+      ctx.font = `bold ${size * 0.15}px "Space Mono"`
+      ctx.textAlign = 'center'
+      ctx.fillStyle = '#14b8a6'
+      ctx.fillText(watermark.text, x, y + size * 0.35)
     }
     
     ctx.restore()
@@ -198,6 +217,26 @@ const Studio = () => {
             <h2 className="text-xs font-bold tracking-[0.3em] uppercase text-white/40 mb-6">Customize</h2>
             
             <div className="space-y-6">
+              <div className="space-y-3">
+                <label className="text-[10px] uppercase tracking-widest text-white/40 block">Style</label>
+                <div className="grid grid-cols-4 gap-2">
+                  {assets.map(asset => (
+                    <button
+                      key={asset.id}
+                      onClick={() => setSelectedAsset(asset.id)}
+                      className={`aspect-square rounded-xl flex flex-col items-center justify-center gap-1 transition-all ${
+                        selectedAsset === asset.id
+                          ? 'bg-teal-500/20 border-2 border-teal-500'
+                          : 'bg-white/5 border border-white/10 hover:bg-white/10'
+                      }`}
+                    >
+                      <span className="text-sm text-teal-500">{asset.icon}</span>
+                      <span className="text-[7px] uppercase tracking-wider text-white/50">{asset.name}</span>
+                    </button>
+                  ))}
+                </div>
+              </div>
+
               <div className="space-y-3">
                 <label className="text-[10px] uppercase tracking-widest text-white/40 block">Watermark Text</label>
                 <input 
