@@ -91,34 +91,16 @@ const LoadingScreen = ({ progress }) => {
           </motion.div>
         </div>
 
-        {/* Percentage */}
-        <motion.div 
-          className="mt-6"
-          key={displayProgress}
-        >
-          <span 
-            className="text-3xl font-bold tabular-nums"
-            style={{ 
-              fontFamily: '"Space Mono", monospace',
-              color: getColor(),
-              textShadow: `0 0 20px ${getColor()}40`,
-            }}
-          >
-            {Math.round(displayProgress)}
-          </span>
-          <span className="text-sm text-white/30 ml-1">%</span>
-        </motion.div>
-
         {/* Minimal status */}
         {displayProgress < 100 && (
           <motion.div 
             className="mt-4"
-            animate={{ opacity: [0.3, 0.6, 0.3] }}
+            animate={{ opacity: [0.3, 0.8, 0.3] }}
             transition={{ duration: 1.5, repeat: Infinity }}
           >
             <div 
-              className="w-1 h-1 rounded-full"
-              style={{ background: getColor() }}
+              className="w-1.5 h-1.5 rounded-full"
+              style={{ background: getColor(), boxShadow: `0 0 10px ${getColor()}` }}
             />
           </motion.div>
         )}
