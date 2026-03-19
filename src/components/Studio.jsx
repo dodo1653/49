@@ -23,6 +23,10 @@ const Studio = () => {
   const assets = [
     { id: 'text', name: 'Text', icon: 'T', preview: null },
     { id: 'gauge', name: 'Gauge', icon: '◠', preview: null },
+    { id: 'asset1', name: 'Style 1', icon: '1', preview: '/ChatGPT Image Mar 19, 2026, 02_56_41 PM.png' },
+    { id: 'asset2', name: 'Style 2', icon: '2', preview: '/ChatGPT Image Mar 19, 2026, 02_57_12 PM.png' },
+    { id: 'asset3', name: 'Style 3', icon: '3', preview: '/ChatGPT Image Mar 19, 2026, 02_58_08 PM.png' },
+    { id: 'asset4', name: 'Style 4', icon: '4', preview: '/ChatGPT Image Mar 19, 2026, 02_58_15 PM.png' },
   ]
 
   const assetImagesRef = useRef({})
@@ -144,6 +148,12 @@ const Studio = () => {
       ctx.textAlign = 'center'
       ctx.fillStyle = '#14b8a6'
       ctx.fillText(watermark.text, x, y + size * 0.35)
+    } else if (assetImagesRef.current[selectedAsset]) {
+      const img = assetImagesRef.current[selectedAsset]
+      if (img.complete) {
+        const imgSize = size * 1.2
+        ctx.drawImage(img, x - imgSize/2, y - imgSize/2, imgSize, imgSize)
+      }
     }
     
     ctx.restore()
@@ -224,14 +234,20 @@ const Studio = () => {
                     <button
                       key={asset.id}
                       onClick={() => setSelectedAsset(asset.id)}
-                      className={`aspect-square rounded-xl flex flex-col items-center justify-center gap-1 transition-all ${
+                      className={`aspect-square rounded-xl flex flex-col items-center justify-center overflow-hidden gap-1 transition-all ${
                         selectedAsset === asset.id
                           ? 'bg-teal-500/20 border-2 border-teal-500'
                           : 'bg-white/5 border border-white/10 hover:bg-white/10'
                       }`}
                     >
-                      <span className="text-sm text-teal-500">{asset.icon}</span>
-                      <span className="text-[7px] uppercase tracking-wider text-white/50">{asset.name}</span>
+                      {asset.preview ? (
+                        <img src={asset.preview} alt={asset.name} className="w-full h-full object-cover" />
+                      ) : (
+                        <>
+                          <span className="text-sm text-teal-500">{asset.icon}</span>
+                          <span className="text-[7px] uppercase tracking-wider text-white/50">{asset.name}</span>
+                        </>
+                      )}
                     </button>
                   ))}
                 </div>
