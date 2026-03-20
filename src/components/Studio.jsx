@@ -12,8 +12,7 @@ const Studio = () => {
   
   const [watermark, setWatermark] = useState({
     opacity: 0.9,
-    width: 120,
-    height: 120,
+    size: 120,
     x: 85,
     y: 85,
     text: 'CORTISOL',
@@ -128,14 +127,13 @@ const Studio = () => {
   const drawWatermark = (ctx, canvas) => {
     const x = (watermark.x / 100) * canvas.width
     const y = (watermark.y / 100) * canvas.height
-    const w = watermark.width
-    const h = watermark.height
+    const size = watermark.size
     
     ctx.save()
     ctx.globalAlpha = watermark.opacity
 
     if (selectedAsset === 'meter') {
-      const radius = w / 2
+      const radius = size / 2
       const cx = x
       const cy = y + radius * 0.3
       
@@ -179,7 +177,7 @@ const Studio = () => {
       ctx.fill()
 
     } else if (selectedAsset === 'text') {
-      ctx.font = `bold ${w * 0.35}px "Space Mono", monospace`
+      ctx.font = `bold ${size * 0.35}px "Space Mono", monospace`
       ctx.textAlign = 'center'
       ctx.textBaseline = 'middle'
       ctx.strokeStyle = '#000'
@@ -189,21 +187,21 @@ const Studio = () => {
       ctx.fillText(watermark.text, x, y)
 
     } else if (selectedAsset === 'badge') {
-      const badgeW = w * 1.4
-      const badgeH = h * 0.8
+      const badgeW = size * 1.4
+      const badgeH = size * 0.8
       ctx.strokeStyle = '#14b8a6'
       ctx.lineWidth = 3
       ctx.strokeRect(x - badgeW/2, y - badgeH/2, badgeW, badgeH)
       ctx.fillStyle = 'rgba(20, 184, 166, 0.1)'
       ctx.fillRect(x - badgeW/2, y - badgeH/2, badgeW, badgeH)
-      ctx.font = `bold ${h * 0.2}px "Space Mono", monospace`
+      ctx.font = `bold ${size * 0.2}px "Space Mono", monospace`
       ctx.fillStyle = '#14b8a6'
       ctx.textAlign = 'center'
       ctx.textBaseline = 'middle'
       ctx.fillText(watermark.text, x, y)
 
     } else if (selectedAsset === 'corner') {
-      const cSize = Math.min(w, h) * 0.5
+      const cSize = size * 0.5
       ctx.strokeStyle = '#14b8a6'
       ctx.lineWidth = 3
       ctx.lineCap = 'round'
@@ -219,7 +217,7 @@ const Studio = () => {
       ctx.fillText(watermark.text, x + 5, y - cSize - 5)
 
     } else if (selectedAsset === 'glitch') {
-      ctx.font = `bold ${w * 0.4}px "Space Mono", monospace`
+      ctx.font = `bold ${size * 0.4}px "Space Mono", monospace`
       ctx.textAlign = 'center'
       ctx.textBaseline = 'middle'
       ctx.fillStyle = '#ff006640'
@@ -230,7 +228,7 @@ const Studio = () => {
       ctx.fillText(watermark.text, x, y)
 
     } else if (selectedAsset === 'stamp') {
-      ctx.font = `bold ${w * 0.25}px "Space Mono", monospace`
+      ctx.font = `bold ${size * 0.25}px "Space Mono", monospace`
       ctx.textAlign = 'center'
       ctx.textBaseline = 'middle'
       ctx.strokeStyle = '#14b8a6'
@@ -238,7 +236,7 @@ const Studio = () => {
       ctx.globalAlpha = watermark.opacity * 0.8
       const textWidth = ctx.measureText(watermark.text).width
       const stampW = textWidth + 20
-      const stampH = w * 0.4
+      const stampH = size * 0.4
       ctx.beginPath()
       ctx.roundRect(x - stampW/2, y - stampH/2, stampW, stampH, 4)
       ctx.stroke()
@@ -248,12 +246,8 @@ const Studio = () => {
     } else if (assetImagesRef.current[selectedAsset]) {
       const img = assetImagesRef.current[selectedAsset]
       if (img.complete) {
-        const scaleX = w / img.width
-        const scaleY = h / img.height
-        const scale = Math.min(scaleX, scaleY)
-        const imgW = img.width * scale
-        const imgH = img.height * scale
-        ctx.drawImage(img, x - imgW/2, y - imgH/2, imgW, imgH)
+        const imgSize = size * 1.2
+        ctx.drawImage(img, x - imgSize/2, y - imgSize/2, imgSize, imgSize)
       }
     }
     
@@ -378,33 +372,20 @@ const Studio = () => {
                 />
               </div>
 
-              <div className="grid grid-cols-2 gap-3">
-                <div className="space-y-2">
-                  <div className="flex justify-between items-center">
-                    <label className="text-[10px] uppercase tracking-widest text-white/40">Width</label>
-                    <span className="text-[10px] font-mono text-teal-500">{watermark.width}px</span>
-                  </div>
-                  <input 
-                    type="range" min="40" max="400" value={watermark.width}
-                    onChange={(e) => setWatermark(prev => ({ ...prev, width: parseInt(e.target.value) }))}
-                    className="w-full accent-teal-500 bg-white/5 h-1 rounded-full"
-                  />
+              <div className="space-y-3">
+                <div className="flex justify-between items-center">
+                  <label className="text-[10px] uppercase tracking-widest text-white/40">Size</label>
+                  <span className="text-[10px] font-mono text-teal-500">{watermark.size}px</span>
                 </div>
-                <div className="space-y-2">
-                  <div className="flex justify-between items-center">
-                    <label className="text-[10px] uppercase tracking-widest text-white/40">Height</label>
-                    <span className="text-[10px] font-mono text-teal-500">{watermark.height}px</span>
-                  </div>
-                  <input 
-                    type="range" min="40" max="400" value={watermark.height}
-                    onChange={(e) => setWatermark(prev => ({ ...prev, height: parseInt(e.target.value) }))}
-                    className="w-full accent-teal-500 bg-white/5 h-1 rounded-full"
-                  />
-                </div>
+                <input 
+                  type="range" min="40" max="300" value={watermark.size}
+                  onChange={(e) => setWatermark(prev => ({ ...prev, size: parseInt(e.target.value) }))}
+                  className="w-full accent-teal-500 bg-white/5 h-1.5 rounded-full"
+                />
               </div>
 
               {selectedAsset === 'meter' && (
-                <div className="space-y-2">
+                <div className="space-y-3">
                   <div className="flex justify-between items-center">
                     <label className="text-[10px] uppercase tracking-widest text-white/40">Needle</label>
                     <span className="text-[10px] font-mono text-teal-500">{watermark.needlePos}%</span>
@@ -412,7 +393,7 @@ const Studio = () => {
                   <input 
                     type="range" min="0" max="100" value={watermark.needlePos}
                     onChange={(e) => setWatermark(prev => ({ ...prev, needlePos: parseInt(e.target.value) }))}
-                    className="w-full accent-teal-500 bg-white/5 h-1 rounded-full"
+                    className="w-full accent-teal-500 bg-white/5 h-1.5 rounded-full"
                   />
                 </div>
               )}
