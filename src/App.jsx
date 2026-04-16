@@ -192,7 +192,7 @@ function App() {
             </motion.div>
             <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.9 }} className="p-4 rounded-lg bg-white/5 border border-white/10">
               <p className="text-xs text-white/30 font-mono tracking-widest mb-2">CONTRACT ADDRESS</p>
-              <p className="text-xs font-mono text-white/50 break-all select-all">FSXznRGdxco6TyyRaqnrC7xnLTsjwq4kwMx4ewk1pump</p>
+              <p className="text-xs font-mono text-white/50 break-all select-all">9e9TSNMyz91KiaME1a4WpH5gWrVpgKrZdyWrJgYtpump</p>
             </motion.div>
           </div>
         </section>
