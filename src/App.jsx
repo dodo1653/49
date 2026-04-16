@@ -113,21 +113,21 @@ function App() {
 
       <div className="bg-white/5 border-b border-white/10 py-3 px-8">
         <div className="max-w-6xl mx-auto flex gap-6 text-xs">
-          <div><span className="text-white/50">VIRAL REACH:</span> <span className="text-red-400">5M+ VIEWS</span></div>
-          <div><span className="text-white/50">X TRENDING:</span> <span className="text-red-400">24K+ POSTS</span></div>
+          <div><span className="text-white/50">VIRAL REACH:</span> <span className="text-white">5M+ VIEWS</span></div>
+          <div><span className="text-white/50">X TRENDING:</span> <span className="text-white">24K+ POSTS</span></div>
           <div><span className="text-white/50">VIDEOS:</span> <span className="text-white">12+ ANALYSIS</span></div>
           <div><span className="text-white/50">VICTIMS:</span> <span className="text-white">5+ WOMEN</span></div>
         </div>
       </div>
 
-      <div className="bg-red-900/20 border-b border-red-500/30 py-4 px-8">
+      <div className="bg-white/10 border-b border-white/10 py-4 px-8">
         <div className="max-w-6xl mx-auto">
           <input 
             type="text" 
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
             placeholder="Search the evidence across the web..."
-            className="w-full bg-black border border-white/20 px-4 py-3 text-sm focus:outline-none focus:border-red-500"
+            className="w-full bg-black border border-white/20 px-4 py-3 text-sm focus:outline-none focus:border-white/40"
           />
           <div className="flex flex-wrap gap-2 mt-3">
             {searchEngines.map((engine, i) => (
@@ -136,7 +136,7 @@ function App() {
                 href={engine.url + (searchQuery || 'sykkuno+scandal')}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-xs bg-white/10 hover:bg-red-900/30 px-3 py-1.5 rounded border border-white/10 hover:border-red-500/50 transition-colors"
+                className="text-xs bg-white/5 hover:bg-white/20 px-3 py-1.5 rounded border border-white/10 hover:border-white/30 transition-colors"
               >
                 {engine.name}
               </a>
@@ -155,7 +155,7 @@ function App() {
                 href={link.url}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-xs hover:text-red-400 text-white/50 transition-colors"
+                className="text-xs hover:text-white text-white/50 transition-colors"
               >
                 {link.icon} {link.name}
               </a>
@@ -192,7 +192,7 @@ function App() {
         </section>
 
         <section className="mb-12">
-          <h3 className="text-sm font-bold text-red-400 mb-4 tracking-widest">// PRIMARY EVIDENCE (CLICK TO VIEW)</h3>
+          <h3 className="text-sm font-bold text-white/50 mb-4 tracking-widest">PRIMARY EVIDENCE</h3>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             {evidenceLinks.map((link) => (
               <a 
@@ -204,7 +204,7 @@ function App() {
               >
                 <div className="flex justify-between items-start">
                   <span className="font-bold text-sm">{link.title}</span>
-                  <span className="text-xs bg-red-500/20 text-red-400 px-2 py-0.5 rounded">{link.views}</span>
+                  <span className="text-xs bg-white/10 text-white/60 px-2 py-0.5 rounded">{link.views}</span>
                 </div>
               </a>
             ))}
@@ -246,7 +246,7 @@ function App() {
             {timeline.map((item, i) => (
               <div key={i} className="relative pl-6">
                 <div className="absolute left-0 top-1 w-2 h-2 bg-red-500 rounded-full -translate-x-[5px]" />
-                <div className="text-sm font-mono text-red-400 mb-1">{item.date}</div>
+                <div className="text-sm font-mono text-white/40 mb-1">{item.date}</div>
                 <div className="text-sm text-white/70">{item.event}</div>
               </div>
             ))}
@@ -260,7 +260,7 @@ function App() {
               <div key={i} className="bg-white/5 border border-white/10 p-4 rounded">
                 <div className="flex justify-between">
                   <span className="font-bold">{stat.platform}</span>
-                  <span className="text-red-400">{stat.views || stat.posts}</span>
+                  <span className="text-white">{stat.views || stat.posts}</span>
                 </div>
                 <p className="text-xs text-white/50 mt-1">{stat.video || stat.hashtag}</p>
               </div>
