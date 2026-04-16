@@ -1,150 +1,182 @@
-import { useEffect, useState, useRef } from 'react'
-import { Routes, Route, useLocation } from 'react-router-dom'
-import { AnimatePresence, motion } from 'framer-motion'
-import Lenis from 'lenis'
-import Hero from './components/Hero'
-import Art from './components/Art'
-import LiveSection from './components/LiveSection'
-import Token from './components/Token'
-import About from './components/About'
-import Community from './components/Community'
-import Footer from './components/Footer'
-import Navbar from './components/Navbar'
-import CinematicTransition from './components/CinematicTransition'
-import Swap from './components/Swap'
-import Studio from './components/Studio'
-import LoadingScreen from './components/LoadingScreen'
+import { useEffect, useState } from 'react'
+import { motion } from 'framer-motion'
 
 function App() {
-  const audioRef = useRef(null)
-  const [isPlaying, setIsPlaying] = useState(false)
   const [isLoaded, setIsLoaded] = useState(false)
-  const [loadProgress, setLoadProgress] = useState(0)
-  const location = useLocation()
-  const isSwapPage = location.pathname === '/swap'
 
   useEffect(() => {
-    if (isSwapPage) {
-      setIsLoaded(true)
-      return
-    }
+    setTimeout(() => setIsLoaded(true), 800)
+  }, [])
 
-    let progress = 0
-    const updateProgress = () => {
-      progress += Math.random() * 8
-      if (progress > 90) progress = 90
-      setLoadProgress(Math.floor(progress))
-    }
+  const uncsImages = [
+    '/uncs/Screenshot 2026-04-16 124019.png',
+    '/uncs/Gemini_Generated_Image_1sq5kp1sq5kp1sq5.png',
+    '/uncs/Gemini_Generated_Image_2bray82bray82bra.png',
+    '/uncs/Gemini_Generated_Image_7uyhwo7uyhwo7uyh.png',
+  ]
 
-    const progressInterval = setInterval(updateProgress, 250)
-
-    const script = document.createElement('script')
-    script.src = 'https://platform.twitter.com/widgets.js'
-    script.async = true
-    script.charset = 'utf-8'
-    script.onload = () => {
-      setLoadProgress(95)
-    }
-    document.body.appendChild(script)
-
-    const lenis = new Lenis({
-      duration: 1.2,
-      easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
-      smoothWheel: true,
-      wheelMultiplier: 1,
-      touchMultiplier: 2,
-    })
-
-    function raf(time) {
-      lenis.raf(time)
-      requestAnimationFrame(raf)
-    }
-
-    requestAnimationFrame(raf)
-
-    setTimeout(() => {
-      setLoadProgress(100)
-      setTimeout(() => setIsLoaded(true), 800)
-      clearInterval(progressInterval)
-    }, 2000)
-
-    return () => {
-      lenis.destroy()
-    }
-  }, [isSwapPage])
-
-  const playAudio = () => {
-    if (!audioRef.current) return
-    audioRef.current.volume = 0.3
-    audioRef.current.play().then(() => {
-      setIsPlaying(true)
-      let vol = 0.3
-      const fadeIn = () => {
-        vol += 0.04
-        if (audioRef.current && vol < 0.5) {
-          audioRef.current.volume = vol
-          requestAnimationFrame(fadeIn)
-        }
-      }
-      fadeIn()
-    }).catch(() => {})
-  }
-
-  const pauseAudio = () => {
-    if (!audioRef.current) return
-    setIsPlaying(false)
-    let vol = audioRef.current.volume
-    const fadeOut = () => {
-      vol -= 0.06
-      if (audioRef.current && vol > 0) {
-        audioRef.current.volume = vol
-        requestAnimationFrame(fadeOut)
-      } else if (audioRef.current) {
-        audioRef.current.pause()
-        audioRef.current.volume = 0
-      }
-    }
-    fadeOut()
-  }
+  const socialLinks = [
+    { name: 'X', url: 'https://x.com/bronchaco' },
+    { name: 'Telegram', url: 'https://t.me/bronchaco' },
+  ]
 
   return (
-    <div className="min-h-screen">
-      <audio ref={audioRef} src="/tiktok-audio.mp3" preload="auto" loop />
-      
-      <AnimatePresence mode="wait">
-        {!isLoaded && !isSwapPage && (
-          <LoadingScreen isLoaded={isLoaded} progress={loadProgress} key="loader" />
-        )}
-      </AnimatePresence>
+    <div className="min-h-screen bg-black text-white font-['Inter']">
+      {/* Loading */}
+      <motion.div 
+        initial={{ opacity: 1 }}
+        animate={{ opacity: isLoaded ? 0 : 1 }}
+        transition={{ duration: 0.5 }}
+        className="fixed inset-0 z-[2000] bg-black flex items-center justify-center"
+      >
+        <motion.div
+          animate={{ opacity: [0.3, 1, 0.3] }}
+          transition={{ duration: 1.5, repeat: Infinity }}
+          className="text-sm font-mono tracking-widest"
+        >
+          SOMEBOBY WILL DO IT AGAIN
+        </motion.div>
+      </motion.div>
 
-      <Routes>
-        <Route path="/swap" element={<Swap />} />
-        <Route path="/studio" element={<Studio />} />
-        <Route path="*" element={
-          <>
-            <CinematicTransition />
-            <Navbar isPlaying={isPlaying} onPlay={playAudio} onPause={pauseAudio} />
-            <Hero />
-            <Art />
-            <LiveSection />
-            <Token />
-            <About />
-            <Community />
-            <Footer />
+      {/* Nav */}
+      <nav className="fixed top-0 left-0 right-0 z-50 py-6 px-8">
+        <div className="max-w-3xl mx-auto flex items-center justify-between">
+          <span className="text-sm font-mono tracking-widest text-white/60">$BRONCHACO</span>
+          <div className="flex gap-6 text-sm">
+            {socialLinks.map(link => (
+              <a 
+                key={link.name}
+                href={link.url}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-white/40 hover:text-white transition-colors font-mono"
+              >
+                {link.name}
+              </a>
+            ))}
+          </div>
+        </div>
+      </nav>
+
+      {/* Hero - main image */}
+      <section className="min-h-screen flex items-center justify-center px-8">
+        <div className="absolute inset-0 z-0">
+          <img 
+            src={uncsImages[0]} 
+            alt="" 
+            className="w-full h-full object-cover opacity-40 grayscale"
+          />
+          <div className="absolute inset-0 bg-gradient-to-b from-black via-transparent to-black" />
+        </div>
+        
+        <div className="relative z-10 max-w-2xl mx-auto text-center">
+          <motion.div 
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.3 }}
+            className="mb-8"
+          >
+            <h1 className="text-3xl md:text-4xl font-light leading-relaxed text-white/80 font-['Inter']">
+              "Somebody has done it before,<br/>
+              somebody will do it again"
+            </h1>
+          </motion.div>
+
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.5 }}
+            className="flex justify-center mb-12"
+          >
             <a 
-              href="https://x.com/dzzox1"
+              href="https://x.com/bronchaco/status/2044730931982766395?s=20"
               target="_blank"
               rel="noopener noreferrer"
-              className="fixed bottom-6 right-6 z-40 transition-all duration-300 hover:opacity-70"
-              style={{ opacity: 0.4 }}
+              className="text-xs text-white/30 hover:text-white/50 transition-colors font-mono underline"
             >
-              <span className="text-[9px] font-light tracking-wide" style={{ color: 'rgba(255,255,255,0.45)', fontFamily: '-apple-system, BlinkMacSystemFont, sans-serif' }}>
-                website by <span style={{ color: 'rgba(255,255,255,0.55)' }}>@dzzox1</span>
-              </span>
+              View original post →
             </a>
-          </>
-        } />
-      </Routes>
+          </motion.div>
+
+          <motion.div 
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.7 }}
+            className="grid grid-cols-2 gap-8 max-w-sm mx-auto mb-12"
+          >
+            <div className="text-center">
+              <p className="text-xs text-white/30 font-mono tracking-widest mb-1">TOKEN</p>
+              <p className="text-lg font-mono">$BRONCHACO</p>
+            </div>
+            <div className="text-center">
+              <p className="text-xs text-white/30 font-mono tracking-widest mb-1">CHAIN</p>
+              <p className="text-lg font-mono">SOLANA</p>
+            </div>
+          </motion.div>
+
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.9 }}
+            className="p-4 rounded-lg bg-white/5 border border-white/10"
+          >
+            <p className="text-xs text-white/30 font-mono tracking-widest mb-2">CONTRACT ADDRESS</p>
+            <p className="text-xs font-mono text-white/50 break-all">Coming soon...</p>
+          </motion.div>
+        </div>
+      </section>
+
+      {/* Gallery - all 4 unique images */}
+      <section className="py-24 px-8">
+        <div className="max-w-3xl mx-auto">
+          <p className="text-xs text-white/30 font-mono tracking-widest mb-8 text-center">GALLERY</p>
+          <div className="grid gap-4">
+            <div className="rounded-lg overflow-hidden border border-white/10">
+              <img src={uncsImages[1]} alt="Art 1" className="w-full opacity-60 hover:opacity-100 transition-opacity grayscale" />
+            </div>
+            <div className="grid grid-cols-3 gap-4">
+              <div className="rounded-lg overflow-hidden border border-white/10 aspect-square">
+                <img src={uncsImages[2]} alt="Art 2" className="w-full h-full object-cover opacity-60 hover:opacity-100 transition-opacity grayscale" />
+              </div>
+              <div className="rounded-lg overflow-hidden border border-white/10 aspect-square">
+                <img src={uncsImages[3]} alt="Art 3" className="w-full h-full object-cover opacity-60 hover:opacity-100 transition-opacity grayscale" />
+              </div>
+              <div className="rounded-lg overflow-hidden border border-white/10 aspect-square bg-white/5 flex items-center justify-center">
+                <span className="text-xs text-white/30 font-mono">+ MORE</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Links */}
+      <section className="py-24 px-8" style={{ background: 'rgba(255,255,255,0.02)' }}>
+        <div className="max-w-3xl mx-auto text-center">
+          <p className="text-xs text-white/30 font-mono tracking-widest mb-8">OFFICIAL LINKS</p>
+          <div className="flex justify-center gap-8">
+            {socialLinks.map(link => (
+              <a 
+                key={link.name}
+                href={link.url}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-sm text-white/50 hover:text-white transition-colors font-mono"
+              >
+                {link.name}
+              </a>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Footer */}
+      <footer className="py-12 px-8 border-t border-white/5">
+        <div className="max-w-3xl mx-auto text-center">
+          <p className="text-xs text-white/20 font-mono">
+            Not financial advice. Just vibes.
+          </p>
+        </div>
+      </footer>
     </div>
   )
 }
