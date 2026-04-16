@@ -3,80 +3,49 @@ import { motion } from 'framer-motion'
 
 function App() {
   const [isLoaded, setIsLoaded] = useState(false)
-  const [searchQuery, setSearchQuery] = useState('')
 
   useEffect(() => {
     setTimeout(() => setIsLoaded(true), 800)
   }, [])
 
   const socialLinks = [
-    { name: 'X', url: 'https://x.com/sykkunofiles1', icon: '𝕏' },
-    { name: 'TikTok', url: 'https://www.tiktok.com/discover/sykkuno', icon: '♪' },
-    { name: 'YouTube', url: 'https://www.youtube.com/results?search_query=sykkuno+scandal', icon: '▶' },
-    { name: 'Reddit', url: 'https://www.reddit.com/search/?q=sykkuno+allegations', icon: '⬡' }
-  ]
-
-  const viralStats = [
-    { platform: 'YouTube', video: 'The Sykkuno Files', views: '1.1M', likes: '39.1K' },
-    { platform: 'YouTube', video: 'SmugAlana Exposed', views: '88K', likes: '3.6K' },
-    { platform: 'YouTube', video: 'kxl Explained', views: '2.9K', likes: '51' },
-    { platform: 'X/Twitter', hashtag: '#Sykkuno', posts: '24K+' },
-    { platform: 'Reddit', hashtag: 'r/LivestreamFail', posts: 'Multiple viral threads' }
+    { name: 'X', url: 'https://x.com/sykkunofiles1' },
+    { name: 'TikTok', url: 'https://www.tiktok.com/discover/sykkuno' },
+    { name: 'YouTube', url: 'https://www.youtube.com/results?search_query=sykkuno+scandal' },
+    { name: 'Reddit', url: 'https://www.reddit.com/search/?q=sykkuno+allegations' }
   ]
 
   const evidenceLinks = [
-    { id: 1, title: '📄 FULL GOOGLE DOC - Hemomal Exposé (32 pages)', url: 'https://docs.google.com/document/d/1bICoQMqFHZ172P8AbZeF0-GCM4pXA-0M8jR82GiLcLs/preview', views: 'MILLIONS' },
-    { id: 2, title: '▶ WestJett YouTube: "The Sykkuno Files Just Dropped" (1.1M views)', url: 'https://www.youtube.com/watch?v=eGK6ywJiD-8', views: '1.1M' },
-    { id: 3, title: '▶ SmugAlana: "Sykkuno exposed as serial cheater" (88K views)', url: 'https://www.youtube.com/watch?v=NqcX1xP8hOs', views: '88K' },
-    { id: 4, title: '▶ kxl: "The Sykkuno Files Explained" (2.9K views)', url: 'https://www.youtube.com/watch?v=6_Hr_w5PeOw', views: '2.9K' },
-    { id: 5, title: '▶ Mujin: "How to go from viral star to serial cheater" (4M+ views)', url: 'https://www.youtube.com/watch?v=C3GMAX8Bfmc', views: '4M+' },
-    { id: 6, title: '📰 GamePOW: The Sykkuno Drama Controversy', url: 'https://gamepow.co/the-sykkuno-drama-controversy-vtuber-hemomal-releases-a-google-doc-exposing-sykkuno/', views: 'VIRAL' },
-    { id: 7, title: '📰 Spilled.gg: Sykkuno allegedly cheated', url: 'https://spilled.gg/sykkuno-girlfriend-women-call-messages/', views: 'VIRAL' },
-    { id: 8, title: '📰 High On Films: Wholesome Persona Crumbling', url: 'https://www.highonfilms.com/sykkunos-wholesome-persona-crumbles-hemomalvt-controversy/', views: 'VIRAL' },
-    { id: 9, title: '📰 Times of India: Valkyrae Responds', url: 'https://timesofindia.indiatimes.com/world/us-streamers/valkyrae-responds-to-sykkuno-controversy-after-hemomal-document-and-voice-recording-go-viral/articleshow/130243907.cms', views: 'VIRAL' },
-    { id: 10, title: '📰 Poprant: "Sorry Not Sorry" Fake Post Debunked', url: 'https://poprant.indiatimes.com/trending/sorry-not-sorry-did-sykkuno-break-his-silence-after-shocking-cheating-allegations-viral-photo-leaves-internet-confused-heres-the-truth/articleshow/130210105.html', views: 'VIRAL' },
-    { id: 11, title: '📰 Inkl: Were Minors Involved?', url: 'https://inkl.com/news/was-sykkuno-involved-with-minors-hemomal-clears-confusion-in-viral-controversy', views: 'VIRAL' },
-    { id: 12, title: '📰 Tribune: Viral Sentiment Analysis', url: 'https://tribune.com.pk/story/2602505/did-sykkuno-address-cheating-allegations-viral-sorry-not-sorry-post-stirs-sentiment', views: 'VIRAL' }
+    { id: 1, title: 'Google Doc - Hemomal Full Exposé (32 pages)', url: 'https://docs.google.com/document/d/1bICoQMqFHZ172P8AbZeF0-GCM4pXA-0M8jR82GiLcLs/preview' },
+    { id: 2, title: 'WestJett: The Sykkuno Files Just Dropped (1.1M views)', url: 'https://www.youtube.com/watch?v=eGK6ywJiD-8' },
+    { id: 3, title: 'SmugAlana: Sykkuno exposed as serial cheater (88K views)', url: 'https://www.youtube.com/watch?v=NqcX1xP8hOs' },
+    { id: 4, title: 'Mujin: From viral star to serial cheater (4M+ views)', url: 'https://www.youtube.com/watch?v=C3GMAX8Bfmc' },
+    { id: 5, title: 'kxl: The Sykkuno Files Explained', url: 'https://www.youtube.com/watch?v=6_Hr_w5PeOw' },
+    { id: 6, title: 'GamePOW: The Sykkuno Drama Controversy', url: 'https://gamepow.co/the-sykkuno-drama-controversy-vtuber-hemomal-releases-a-google-doc-exposing-sykkuno/' },
+    { id: 7, title: 'Spilled.gg: Sykkuno allegedly cheated', url: 'https://spilled.gg/sykkuno-girlfriend-women-call-messages/' },
+    { id: 8, title: 'High On Films: Wholesome Persona Crumbling', url: 'https://www.highonfilms.com/sykkunos-wholesome-persona-crumbles-hemomalvt-controversy/' },
+    { id: 9, title: 'Times of India: Valkyrae responds', url: 'https://timesofindia.indiatimes.com/world/us-streamers/valkyrae-responds-to-sykkuno-controversy-after-hemomal-document-and-voice-recording-go-viral/articleshow/130243907.cms' },
+    { id: 10, title: 'Poprant: Fake "sorry not sorry" debunked', url: 'https://poprant.indiatimes.com/trending/sorry-not-sorry-did-sykkuno-break-his-silence-after-shocking-cheating-allegations-viral-photo-leaves-internet-confused-heres-the-truth/articleshow/130210105.html' },
+    { id: 11, title: 'Inkl: Were minors involved?', url: 'https://inkl.com/news/was-sykkuno-involved-with-minors-hemomal-clears-confusion-in-viral-controversy' },
+    { id: 12, title: 'Tribune: Viral sentiment analysis', url: 'https://tribune.com.pk/story/2602505/did-sykkuno-address-cheating-allegations-viral-sorry-not-sorry-post-stirs-sentiment' }
   ]
 
   const subjects = [
-    { name: 'Thomas "Sykkuno"', role: 'PRIMARY SUBJECT', status: 'ALLEGED', bio: '34yo, 3.4M Twitch followers, known as "wholesome king", software developer turned streamer' },
-    { name: 'HemomalVT', role: 'WHISTLEBLOWER', status: 'ACTIVE', bio: 'VTuber who released 32-page document with screenshots, timelines, payments, and audio recording' },
-    { name: 'Valkyrae', role: 'RESPONDENT', status: 'COMMENTED', bio: 'Top creator, close friend - posted "Disappointing :(" - one of few to respond' },
-    { name: 'Elfilea', role: 'WITNESS', status: 'STATEMENT', bio: '5-year victim, says "used and lied to", corroborates Hemomal story' },
-    { name: 'Girlfriend (Unnamed)', role: 'AFFECTED', status: 'SILENT', bio: 'Lived with Sykkuno since 2021, discovered affairs in April 2026' }
+    { name: 'Thomas "Sykkuno"', role: 'PRIMARY', status: 'ALLEGED', bio: '34yo, 3.4M Twitch followers, "wholesome king" persona' },
+    { name: 'HemomalVT', role: 'WHISTLEBLOWER', status: 'ACTIVE', bio: 'VTuber who released 32-page exposé with evidence' },
+    { name: 'Valkyrae', role: 'RESPONDENT', status: 'COMMENTED', bio: 'Close friend - posted "Disappointing :("' },
+    { name: 'Elfilea', role: 'WITNESS', status: 'STATEMENT', bio: '5-year victim, corroborates the story' },
+    { name: 'Girlfriend', role: 'AFFECTED', status: 'SILENT', bio: 'Lived with Sykkuno since 2021' }
   ]
 
   const timeline = [
-    { date: '2021', event: 'Sykkuno begins living with long-term girlfriend while secretly messaging multiple women' },
-    { date: 'Dec 2025', event: 'Sykkuno takes woman to Paris during TFT tournament, sends €500-€1,550 via PayPal' },
-    { date: 'April 10, 2026', event: 'HemomalVT releases 32-page Google Doc with screenshots, timeline, and audio recording' },
-    { date: 'April 10, 2026', event: 'Voice recording surfaces where Sykkuno allegedly admits to behaviors' },
-    { date: 'April 11, 2026', event: 'WestJett video hits 1M+ views within hours - goes massively viral' },
-    { date: 'April 11, 2026', event: '#Sykkuno trends on X with 24K+ posts, Reddit threads explode' },
-    { date: 'April 12, 2026', event: 'Multiple YouTubers release analysis videos (4M+ total views)' },
-    { date: 'April 13, 2026', event: 'Valkyrae responds "Disappointing :(" - becomes top engagement' },
-    { date: 'April 13, 2026', event: 'Fake "sorry not sorry" screenshot spreads - confirmed fabrication' },
-    { date: 'April 14, 2026', event: 'Hemomal clarifies "predator" - means preying on smaller VTubers, not minors' },
-    { date: 'PRESENT', event: 'Sykkuno has NOT responded publicly - full silence' }
-  ]
-
-  const searchEngines = [
-    { name: '🔍 Search X', url: 'https://x.com/search?q=' },
-    { name: '🎵 Search TikTok', url: 'https://www.tiktok.com/search?query=' },
-    { name: '▶ Search YouTube', url: 'https://www.youtube.com/results?search_query=' },
-    { name: '⬡ Search Reddit', url: 'https://www.reddit.com/search/?q=' },
-    { name: 'G Search Google', url: 'https://www.google.com/search?q=' }
-  ]
-
-  const keyEvidence = [
-    '32-page Google Doc with full timeline',
-    'Voice recording of admission (17+ minutes)',
-    'PayPal payment screenshots (€500-€1,550)',
-    'Discord DM screenshots',
-    'Paris trip proof (Dec 2025)',
-    '5+ women coming forward',
-    'xQc old advice clip resurfaces'
+    { date: '2021', event: 'Long-term relationship began while secretly messaging multiple women' },
+    { date: 'Dec 2025', event: 'Paris trip with woman during TFT tournament, €500-€1,550 payments' },
+    { date: 'April 10, 2026', event: 'Hemomal releases 32-page Google Doc with screenshots and audio' },
+    { date: 'April 11, 2026', event: 'WestJett video hits 1M+ views, #Sykkuno trends on X' },
+    { date: 'April 13, 2026', event: 'Valkyrae responds "Disappointing :("' },
+    { date: 'April 14, 2026', event: 'Hemomal clarifies "predator" means preying on smaller VTubers' },
+    { date: 'NOW', event: 'Sykkuno has NOT responded - full silence' }
   ]
 
   return (
@@ -92,141 +61,74 @@ function App() {
           transition={{ duration: 1.5, repeat: Infinity }}
           className="text-sm tracking-widest"
         >
-          SYYKUNO FILES // LOADING EVIDENCE...
+          LOADING SYYKUNO FILES...
         </motion.div>
       </motion.div>
 
       <header className="border-b border-white/20 py-4 px-8">
-        <div className="max-w-6xl mx-auto flex items-center justify-between">
+        <div className="max-w-4xl mx-auto flex items-center justify-between">
           <div className="flex items-center gap-4">
-            <span className="text-3xl">📁</span>
+            <span className="text-2xl">FOLDER</span>
             <div>
-              <h1 className="text-xl font-bold tracking-wider">SYYKUNO FILES</h1>
-              <p className="text-xs text-white/50">THE EXPOSÉ THAT BROKE THE INTERNET</p>
+              <h1 className="text-lg font-bold">SYYKUNO FILES</h1>
+              <p className="text-xs text-white/50">DOCUMENT ARCHIVE // APRIL 2026</p>
             </div>
           </div>
-          <div className="text-xs text-red-400 font-bold">
-            🔴 LIVE INVESTIGATION
+          <div className="text-xs text-white/40">
+            STATUS: ACTIVE
           </div>
         </div>
       </header>
 
       <div className="bg-white/5 border-b border-white/10 py-3 px-8">
-        <div className="max-w-6xl mx-auto flex gap-6 text-xs">
-          <div><span className="text-white/50">VIRAL REACH:</span> <span className="text-red-400">5M+ VIEWS</span></div>
-          <div><span className="text-white/50">X TRENDING:</span> <span className="text-red-400">24K+ POSTS</span></div>
-          <div><span className="text-white/50">VIDEOS:</span> <span className="text-white">12+ ANALYSIS</span></div>
-          <div><span className="text-white/50">VICTIMS:</span> <span className="text-white">5+ WOMEN</span></div>
+        <div className="max-w-4xl mx-auto flex gap-6 text-xs">
+          <div><span className="text-white/50">EVIDENCE:</span> <span className="text-white">{evidenceLinks.length}</span></div>
+          <div><span className="text-white/50">SUBJECTS:</span> <span className="text-white">{subjects.length}</span></div>
+          <div><span className="text-white/50">UPDATED:</span> <span className="text-white">APRIL 14, 2026</span></div>
         </div>
       </div>
 
-      <div className="bg-red-900/20 border-b border-red-500/30 py-4 px-8">
-        <div className="max-w-6xl mx-auto">
-          <input 
-            type="text" 
-            value={searchQuery}
-            onChange={(e) => setSearchQuery(e.target.value)}
-            placeholder="Search the evidence across the web..."
-            className="w-full bg-black border border-white/20 px-4 py-3 text-sm focus:outline-none focus:border-red-500"
-          />
-          <div className="flex flex-wrap gap-2 mt-3">
-            {searchEngines.map((engine, i) => (
-              <a 
-                key={i}
-                href={engine.url + (searchQuery || 'sykkuno+scandal')}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="text-xs bg-white/10 hover:bg-red-900/30 px-3 py-1.5 rounded border border-white/10 hover:border-red-500/50 transition-colors"
-              >
-                {engine.name}
-              </a>
-            ))}
-          </div>
-        </div>
-      </div>
-
-      <div className="bg-white/5 border-b border-white/10 py-3 px-8">
-        <div className="max-w-6xl mx-auto flex items-center justify-between">
-          <div className="text-xs text-white/50">OFFICIAL:</div>
-          <div className="flex gap-4">
-            {socialLinks.map((link, i) => (
-              <a 
-                key={i}
-                href={link.url}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="text-xs hover:text-red-400 text-white/50 transition-colors"
-              >
-                {link.icon} {link.name}
-              </a>
-            ))}
-          </div>
-        </div>
-      </div>
-
-      <main className="max-w-6xl mx-auto p-8">
+      <main className="max-w-4xl mx-auto p-8">
         <section className="mb-12">
-          <div className="bg-red-900/10 border border-red-500/30 p-6 rounded-lg">
-            <h2 className="text-xl font-bold mb-4 flex items-center gap-2">
-              <span className="text-red-400">⚠</span> THE CASE SUMMARY
-            </h2>
-            <p className="text-sm text-white/80 leading-relaxed mb-4">
-              <strong>April 10, 2026:</strong> VTuber Hemomal released a 32-page document exposing Sykkuno (Thomas, 34) as a 
-              "serial cheater, liar, and manipulator." The document includes screenshots, payment records (PayPal €500-€1,550), 
-              timeline, and a voice recording where he allegedly admits to everything. Sykkuno has NOT responded publicly 
-              as of today - complete silence.
+          <div className="bg-white/5 border border-white/20 p-6 rounded-lg">
+            <h2 className="text-lg font-bold mb-4">CASE SUMMARY</h2>
+            <p className="text-sm text-white/70 leading-relaxed mb-4">
+              April 10, 2026: VTuber Hemomal released a 32-page document exposing Sykkuno (Thomas, 34) as a 
+              "serial cheater, liar, and manipulator." Evidence includes screenshots, PayPal payment records, 
+              timeline, and voice recording. Sykkuno has NOT responded publicly - complete silence.
             </p>
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-4 text-xs mt-4">
-              <div className="bg-black/50 p-3 rounded">
-                <p className="text-white/40 mb-1">VIDEOS CREATED</p>
-                <p className="text-xl font-bold">12+</p>
-              </div>
-              <div className="bg-black/50 p-3 rounded">
-                <p className="text-white/40 mb-1">TOTAL VIEWS</p>
-                <p className="text-xl font-bold">5M+</p>
-              </div>
-              <div className="bg-black/50 p-3 rounded">
-                <p className="text-white/40 mb-1">X POSTS</p>
-                <p className="text-xl font-bold">24K+</p>
-              </div>
-              <div className="bg-black/50 p-3 rounded">
-                <p className="text-white/40 mb-1">SYKKUNO RESPONSE</p>
-                <p className="text-xl font-bold text-red-400">NONE</p>
-              </div>
+            <div className="flex gap-4 text-xs">
+              <span className="bg-white/10 px-2 py-1 rounded">TOKEN: $SYYKUNO</span>
+              <span className="bg-white/10 px-2 py-1 rounded">CHAIN: SOLANA</span>
             </div>
           </div>
         </section>
 
         <section className="mb-12">
-          <h3 className="text-sm font-bold text-red-400 mb-4 tracking-widest">// 🔴 PRIMARY EVIDENCE (CLICK TO VIEW)</h3>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <h3 className="text-sm font-bold text-white/50 mb-4 tracking-widest">EVIDENCE LINKS</h3>
+          <div className="space-y-2">
             {evidenceLinks.map((link) => (
               <a 
                 key={link.id}
                 href={link.url}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="block bg-white/5 border border-white/10 hover:border-red-500/50 p-4 rounded-lg transition-all hover:bg-red-900/10"
+                className="block bg-white/5 border border-white/10 hover:border-white/30 p-3 rounded transition-colors"
               >
-                <div className="flex justify-between items-start">
-                  <span className="font-bold text-sm">{link.title}</span>
-                  <span className="text-xs bg-red-500/20 text-red-400 px-2 py-0.5 rounded">{link.views}</span>
-                </div>
+                <span className="text-sm">{link.title}</span>
               </a>
             ))}
           </div>
         </section>
 
         <section className="mb-12">
-          <h3 className="text-sm font-bold text-white/50 mb-4 tracking-widest">// SUBJECTS OF INTEREST</h3>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+          <h3 className="text-sm font-bold text-white/50 mb-4 tracking-widest">SUBJECTS</h3>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             {subjects.map((subject, i) => (
               <div key={i} className="bg-white/5 border border-white/10 p-4 rounded">
                 <div className="flex justify-between items-start mb-2">
-                  <span className="font-bold">{subject.name}</span>
-                  <span className={`text-xs px-2 py-0.5 rounded ${subject.status === 'ALLEGED' ? 'bg-yellow-500/20 text-yellow-400' : subject.status === 'COMMENTED' ? 'bg-blue-500/20 text-blue-400' : subject.status === 'ACTIVE' ? 'bg-green-500/20 text-green-400' : 'bg-white/10'}`}>
-                    {subject.status}
-                  </span>
+                  <span className="font-bold text-sm">{subject.name}</span>
+                  <span className="text-xs bg-white/10 px-2 py-0.5 rounded">{subject.status}</span>
                 </div>
                 <p className="text-xs text-white/50 mb-1">{subject.role}</p>
                 <p className="text-xs text-white/40">{subject.bio}</p>
@@ -236,23 +138,12 @@ function App() {
         </section>
 
         <section className="mb-12">
-          <h3 className="text-sm font-bold text-white/50 mb-4 tracking-widest">// KEY EVIDENCE POINTS</h3>
-          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3">
-            {keyEvidence.map((evidence, i) => (
-              <div key={i} className="bg-white/5 border border-white/10 p-3 rounded text-center">
-                <span className="text-sm text-white/70">{evidence}</span>
-              </div>
-            ))}
-          </div>
-        </section>
-
-        <section className="mb-12">
-          <h3 className="text-sm font-bold text-white/50 mb-4 tracking-widest">// TIMELINE OF EVENTS</h3>
-          <div className="border-l-2 border-red-500/30 ml-4 space-y-6">
+          <h3 className="text-sm font-bold text-white/50 mb-4 tracking-widest">TIMELINE</h3>
+          <div className="border-l-2 border-white/20 ml-4 space-y-6">
             {timeline.map((item, i) => (
               <div key={i} className="relative pl-6">
-                <div className="absolute left-0 top-1 w-2 h-2 bg-red-500 rounded-full -translate-x-[5px]" />
-                <div className="text-sm font-mono text-red-400 mb-1">{item.date}</div>
+                <div className="absolute left-0 top-1 w-2 h-2 bg-white/40 rounded-full -translate-x-[5px]" />
+                <div className="text-sm font-mono text-white/40 mb-1">{item.date}</div>
                 <div className="text-sm text-white/70">{item.event}</div>
               </div>
             ))}
@@ -260,23 +151,18 @@ function App() {
         </section>
 
         <section className="mb-12">
-          <h3 className="text-sm font-bold text-white/50 mb-4 tracking-widest">// VIRAL STATS</h3>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-            {viralStats.map((stat, i) => (
-              <div key={i} className="bg-white/5 border border-white/10 p-4 rounded">
-                <div className="flex justify-between">
-                  <span className="font-bold">{stat.platform}</span>
-                  <span className="text-red-400">{stat.views || stat.posts}</span>
-                </div>
-                <p className="text-xs text-white/50 mt-1">{stat.video || stat.hashtag}</p>
-              </div>
-            ))}
+          <h3 className="text-sm font-bold text-white/50 mb-4 tracking-widest">SEARCH SOCIAL MEDIA</h3>
+          <div className="flex flex-wrap gap-2">
+            <a href="https://x.com/search?q=sykkuno" target="_blank" rel="noopener noreferrer" className="text-xs bg-white/10 hover:bg-white/20 px-3 py-2 rounded">Search X</a>
+            <a href="https://www.tiktok.com/discover/sykkuno" target="_blank" rel="noopener noreferrer" className="text-xs bg-white/10 hover:bg-white/20 px-3 py-2 rounded">Search TikTok</a>
+            <a href="https://www.youtube.com/results?search_query=sykkuno+scandal" target="_blank" rel="noopener noreferrer" className="text-xs bg-white/10 hover:bg-white/20 px-3 py-2 rounded">Search YouTube</a>
+            <a href="https://www.reddit.com/search/?q=sykkuno+allegations" target="_blank" rel="noopener noreferrer" className="text-xs bg-white/10 hover:bg-white/20 px-3 py-2 rounded">Search Reddit</a>
+            <a href="https://www.google.com/search?q=sykkuno+scandal" target="_blank" rel="noopener noreferrer" className="text-xs bg-white/10 hover:bg-white/20 px-3 py-2 rounded">Search Google</a>
           </div>
         </section>
 
         <footer className="border-t border-white/10 pt-8 text-center">
           <p className="text-xs text-white/30">SYYKUNO FILES // EDUCATIONAL PURPOSES ONLY</p>
-          <p className="text-xs text-white/20 mt-2">Compiling publicly available information since April 2026</p>
         </footer>
       </main>
     </div>
