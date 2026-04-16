@@ -19,8 +19,8 @@ function App() {
   ]
 
   const socialLinks = [
-    { name: 'X', url: 'https://x.com/bronchaco' },
-    { name: 'Telegram', url: 'https://t.me/bronchaco' },
+    { name: 'X', url: 'https://x.com/shitcoiner' },
+    { name: 'Telegram', url: 'https://t.me/shitcoiner' },
   ]
 
   const BronchacoStudio = () => {
@@ -47,7 +47,7 @@ function App() {
       const canvas = canvasRef.current
       if (!canvas) return
       const link = document.createElement('a')
-      link.download = 'bronchaco-meme.png'
+      link.download = 'shitcoiner-meme.png'
       link.href = canvas.toDataURL()
       link.click()
     }
@@ -55,7 +55,7 @@ function App() {
     return (
       <div className="min-h-screen bg-black text-white font-['Inter']">
         <nav className="fixed top-0 left-0 right-0 z-50 py-6 px-8 flex items-center justify-between">
-          <a href="/" className="text-sm font-mono tracking-widest text-white/60">$BRONCHACO</a>
+          <a href="/" className="text-sm font-mono tracking-widest text-white/60">$SHITCOINER</a>
           <a href="/" className="text-xs text-white/30 hover:text-white/50 font-mono">← Back</a>
         </nav>
 
@@ -147,7 +147,7 @@ function App() {
         <>
         <nav className="fixed top-0 left-0 right-0 z-50 py-6 px-8">
           <div className="max-w-3xl mx-auto flex items-center justify-between">
-            <a href="/" className="text-sm font-mono tracking-widest text-white/60">$BRONCHACO</a>
+            <a href="/" className="text-sm font-mono tracking-widest text-white/60">$SHITCOINER</a>
             <div className="flex gap-6 text-sm">
               {socialLinks.map(link => (
                 <a 
@@ -176,14 +176,14 @@ function App() {
               </h1>
             </motion.div>
             <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.5 }} className="flex justify-center mb-12">
-              <a href="https://x.com/bronchaco/status/2044730931982766395?s=20" target="_blank" rel="noopener noreferrer" className="text-xs text-white/30 hover:text-white/50 transition-colors font-mono underline">
+              <a href="https://x.com/AdamBLiv/status/2044846661990486072?s=20" target="_blank" rel="noopener noreferrer" className="text-xs text-white/30 hover:text-white/50 transition-colors font-mono underline">
                 View original post →
               </a>
             </motion.div>
             <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.7 }} className="grid grid-cols-2 gap-8 max-w-sm mx-auto mb-12">
               <div className="text-center">
                 <p className="text-xs text-white/30 font-mono tracking-widest mb-1">TOKEN</p>
-                <p className="text-lg font-mono">$BRONCHACO</p>
+                <p className="text-lg font-mono">$SHITCOINER</p>
               </div>
               <div className="text-center">
                 <p className="text-xs text-white/30 font-mono tracking-widest mb-1">CHAIN</p>
