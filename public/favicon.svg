@@ -1,4 +1,5 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32">
   <rect width="32" height="32" rx="0" fill="#000000"/>
-  <text x="16" y="23" font-size="18" text-anchor="middle" fill="#ffffff" font-family="Space Mono, monospace" font-weight="bold">B</text>
+  <text x="16" y="22" font-size="16" text-anchor="middle" fill="#ff0000" font-family="Courier New, monospace" font-weight="bold">S</text>
+  <text x="16" y="28" font-size="6" text-anchor="middle" fill="#ffffff" font-family="Courier New, monospace">FILES</text>
 </svg>
