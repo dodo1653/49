@@ -17,21 +17,23 @@ function App() {
   ]
 
   const mediaGallery = [
-    { id: 1, type: 'link', title: 'Hemomal Google Doc', date: 'April 10, 2026', source: 'HemomalVT', url: 'https://docs.google.com/document/d/1X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5/edit' },
-    { id: 2, type: 'link', title: 'Valkyrae Tweet "Disappointing :("', date: 'April 13, 2026', source: 'X/Twitter', url: 'https://x.com/Valkyrae/status/1909981234567890' },
-    { id: 3, type: 'video', title: 'The Sykkuno Files - YouTube (1.1M views)', date: 'April 11, 2026', source: 'WestJett', url: 'https://www.youtube.com/watch?v=eGK6ywJiD-8' },
-    { id: 4, type: 'link', title: 'Sykkuno Wikipedia', date: '2020-2026', source: 'Wikipedia', url: 'https://en.wikipedia.org/wiki/Sykkuno' },
-    { id: 5, type: 'link', title: 'GamePOW Article', date: 'April 11, 2026', source: 'GamePOW', url: 'https://gamepow.co/the-sykkuno-drama-controversy-vtuber-hemomal-releases-a-google-doc-exposing-sykkuno/' },
-    { id: 6, type: 'link', title: 'Spilled.gg Report', date: 'April 11, 2026', source: 'Spilled.gg', url: 'https://spilled.gg/sykkuno-girlfriend-women-call-messages/' },
-    { id: 7, type: 'link', title: 'High On Films Analysis', date: 'April 11, 2026', source: 'High On Films', url: 'https://www.highonfilms.com/sykkunos-wholesome-persona-crumbles-hemomalvt-controversy/' },
-    { id: 8, type: 'link', title: 'Times of India - Valkyrae Responds', date: 'April 13, 2026', source: 'Times of India', url: 'https://timesofindia.indiatimes.com/world/us-streamers/valkyrae-responds-to-sykkuno-controversy-after-hemomal-document-and-voice-recording-go-viral/articleshow/130243907.cms' }
+    { id: 1, type: 'link', title: '📄 Hemomal Google Doc (Full)', date: 'April 10, 2026', source: 'HemomalVT', url: 'https://docs.google.com/document/d/1bICoQMqFHZ172P8AbZeF0-GCM4pXA-0M8jR82GiLcLs/preview' },
+    { id: 2, type: 'link', title: '🐦 Valkyrae Tweet Response', date: 'April 13, 2026', source: 'X/Twitter', url: 'https://x.com/Valkyrae/status/1909981234567890' },
+    { id: 3, type: 'video', title: '🎬 WestJett Analysis (1.1M)', date: 'April 11, 2026', source: 'YouTube', url: 'https://www.youtube.com/watch?v=eGK6ywJiD-8' },
+    { id: 4, type: 'video', title: '🎬 kxl Explainer (2.9K)', date: 'April 12, 2026', source: 'YouTube', url: 'https://www.youtube.com/watch?v=6_Hr_w5PeOw' },
+    { id: 5, type: 'link', title: '📰 GamePOW Article', date: 'April 11, 2026', source: 'GamePOW', url: 'https://gamepow.co/the-sykkuno-drama-controversy-vtuber-hemomal-releases-a-google-doc-exposing-sykkuno/' },
+    { id: 6, type: 'link', title: '📰 Spilled.gg Report', date: 'April 11, 2026', source: 'Spilled.gg', url: 'https://spilled.gg/sykkuno-girlfriend-women-call-messages/' },
+    { id: 7, type: 'link', title: '📰 High On Films', date: 'April 11, 2026', source: 'High On Films', url: 'https://www.highonfilms.com/sykkunos-wholesome-persona-crumbles-hemomalvt-controversy/' },
+    { id: 8, type: 'link', title: '📰 Times of India', date: 'April 13, 2026', source: 'TOI', url: 'https://timesofindia.indiatimes.com/world/us-streamers/valkyrae-responds-to-sykkuno-controversy-after-hemomal-document-and-voice-recording-go-viral/articleshow/130243907.cms' },
+    { id: 9, type: 'link', title: '📰 Wikipedia Entry', date: '2020-2026', source: 'Wikipedia', url: 'https://en.wikipedia.org/wiki/Sykkuno' },
+    { id: 10, type: 'link', title: '📰 Inkl - Minors Claim', date: 'April 14, 2026', source: 'Inkl', url: 'https://inkl.com/news/was-sykkuno-involved-with-minors-hemomal-clears-confusion-in-viral-controversy' }
   ]
 
   const subjects = [
-    { name: 'Thomas "Sykkuno"', role: 'PRIMARY SUBJECT', status: 'ALLEGED', image: 'https://upload.wikimedia.org/wikipedia/commons/thumb/c/c3/Sykkuno_at_Animethon_2022_%28cropped%29.jpg/440px-Sykkuno_at_Animethon_2022_%28cropped%29.jpg', bio: '34yo streamer, 3.4M Twitch followers, known as "wholesome king"' },
-    { name: 'HemomalVT', role: 'WHISTLEBLOWER', status: 'ACTIVE', image: null, bio: 'VTuber who released 32-page exposé document' },
-    { name: 'Valkyrae', role: 'RESPONDENT', status: 'COMMENTED', image: 'https://upload.wikimedia.org/wikipedia/commons/thumb/d/d7/Valkyrae_in_2022.jpg/440px-Valkyrae_in_2022.jpg', bio: 'Top creator, close friend, posted "Disappointing :("' },
-    { name: 'Elfilea', role: 'WITNESS', status: 'STATEMENT', image: null, bio: '5-year victim, claims "used and lied to"' },
+    { name: 'Thomas "Sykkuno"', role: 'PRIMARY SUBJECT', status: 'ALLEGED', image: 'https://i.imgur.com/8x7kQqz.jpg', bio: '34yo streamer, 3.4M Twitch followers, known as "wholesome king"' },
+    { name: 'HemomalVT', role: 'WHISTLEBLOWER', status: 'ACTIVE', image: 'https://i.imgur.com/9Ym2RnK.png', bio: 'VTuber who released 32-page exposé document' },
+    { name: 'Valkyrae', role: 'RESPONDENT', status: 'COMMENTED', image: 'https://i.imgur.com/kE3dL4W.jpg', bio: 'Top creator, close friend, posted "Disappointing :("' },
+    { name: 'Elfilea', role: 'WITNESS', status: 'STATEMENT', image: 'https://i.imgur.com/JHnR8mW.png', bio: '5-year victim, claims "used and lied to"' },
     { name: 'Long-term Girlfriend', role: 'AFFECTED PARTY', status: 'UNNAMED', image: null, bio: 'Lived with Sykkuno since 2021, discovered affairs' }
   ]
 
