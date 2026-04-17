@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from 'react'
+import { useEffect, useRef } from 'react'
 import { motion, useScroll, useTransform } from 'framer-motion'
 import Lenis from 'lenis'
 
@@ -25,9 +25,10 @@ function App() {
         <div className="max-w-6xl mx-auto flex items-center justify-between">
           <button 
             onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
-            className="text-xl font-bold text-white tracking-wide hover:text-white/80 transition-colors"
+            className="flex items-center gap-2 text-xl font-bold text-white tracking-wide hover:text-white/80 transition-colors"
           >
-            $49
+            <span>$49</span>
+            <span className="text-xs text-white/30 px-1.5 py-0.5 bg-white/5 rounded">SOL</span>
           </button>
           <a 
             href="https://x.com/49onchain" 
@@ -119,12 +120,16 @@ function App() {
             whileInView={{ opacity: 1, scale: 1 }}
             viewport={{ once: true }}
             transition={{ duration: 0.8 }}
-            className="relative aspect-[16/9] rounded-3xl overflow-hidden"
+            className="relative aspect-[16/9] rounded-3xl overflow-hidden group cursor-pointer"
+            onClick={() => window.open('https://www.tiktok.com/search?q=7x7%3D49&t=1776460964757', '_blank')}
           >
-            <img src="/7x7/image.png" alt="" className="w-full h-full object-cover opacity-50" />
+            <img src="/7x7/image.png" alt="" className="w-full h-full object-cover opacity-50 group-hover:opacity-60 transition-opacity" />
             <div className="absolute inset-0 bg-gradient-to-t from-[#0d0b0a] via-transparent to-[#0d0b0a]/50" />
-            <div className="absolute inset-0 flex items-center justify-center">
+            <div className="absolute inset-0 flex flex-col items-center justify-center gap-4">
               <p className="text-6xl md:text-7xl font-light text-white/10 tracking-[0.5em]">7×7=49</p>
+              <svg className="w-12 h-12 text-white/20 group-hover:text-white/40 transition-colors" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M19.59 6.69a4.83 4.83 0 01-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 01-5.2 1.74 2.89 2.89 0 012.31-4.64 2.93 2.93 0 01.88.13V9.4a6.84 6.84 0 00-1-.05A6.33 6.33 0 005 20.1a6.34 6.34 0 0010.86-4.43v-7a8.16 8.16 0 004.77 1.52v-3.4a4.85 4.85 0 01-1-.1z"/>
+              </svg>
             </div>
           </motion.div>
         </div>
