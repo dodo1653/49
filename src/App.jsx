@@ -75,42 +75,42 @@ function App() {
             initial={{ opacity: 0, y: 80 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 1, ease: [0.16, 1, 0.3, 1] }}
-            className="text-8xl md:text-[7rem] lg:text-[9rem] font-bold tracking-tighter text-white mb-6"
+            className="text-8xl md:text-[7rem] lg:text-[9rem] font-bold tracking-tighter text-white mb-2"
           >
             7×7=49
           </motion.h1>
+          
+          <motion.p 
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ delay: 0.3, duration: 0.8 }}
+            className="text-xl md:text-2xl text-white/40 font-light tracking-wide"
+          >
+            The equation that will steal your girl
+          </motion.p>
 
           <motion.div
-            initial={{ opacity: 0, y: 20 }}
+            initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.4, duration: 0.6 }}
-            className="mb-4"
+            transition={{ delay: 0.6, duration: 0.6 }}
+            className="mt-16"
           >
             <div className="inline-flex items-center gap-4 px-6 py-3 bg-white/5 backdrop-blur-sm rounded-full border border-white/8">
               <span className="w-2 h-2 bg-white/60 rounded-full" />
               <span className="text-sm text-white/50 font-mono tracking-wide">38M+ views across platforms</span>
             </div>
           </motion.div>
-          
-          <motion.p 
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ delay: 0.6, duration: 0.8 }}
-            className="text-xl md:text-2xl text-white/40 font-light tracking-wide mb-16"
-          >
-            The equation that will steal your girl
-          </motion.p>
-
-          <motion.div style={{ opacity: heroOpacity }} className="absolute bottom-12 left-1/2 -translate-x-1/2 z-10">
-            <motion.div 
-              animate={{ y: [0, 12, 0] }} 
-              transition={{ duration: 2, repeat: Infinity }}
-              className="text-white/20 text-2xl"
-            >
-              ↓
-            </motion.div>
-          </motion.div>
         </div>
+
+        <motion.div style={{ opacity: heroOpacity }} className="absolute bottom-12 left-1/2 -translate-x-1/2 z-10">
+          <motion.div 
+            animate={{ y: [0, 12, 0] }} 
+            transition={{ duration: 2, repeat: Infinity }}
+            className="text-white/20 text-2xl"
+          >
+            ↓
+          </motion.div>
+        </motion.div>
       </section>
 
       <section className="py-24 px-6">
