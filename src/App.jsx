@@ -6,10 +6,9 @@ function App() {
   const videoRef = useRef(null)
   const { scrollY } = useScroll()
   
-  const y1 = useTransform(scrollY, [0, 1000], [0, 150])
-  const y2 = useTransform(scrollY, [0, 1000], [0, -150])
-  const heroOpacity = useTransform(scrollY, [0, 500], [1, 0])
-  const heroScale = useTransform(scrollY, [0, 500], [1, 1.1])
+  const y1 = useTransform(scrollY, [0, 1000], [0, 100])
+  const heroOpacity = useTransform(scrollY, [0, 400], [1, 0])
+  const bgY = useTransform(scrollY, [0, 2000], [0, 50])
 
   useEffect(() => {
     setTimeout(() => setIsLoaded(true), 1000)
@@ -32,64 +31,77 @@ function App() {
   ]
 
   return (
-    <div className="min-h-screen bg-[#fafafa] text-[#1a1a1a] font-sans overflow-x-hidden">
+    <div className="min-h-screen bg-[#f8f6f3] text-[#1a1a1a] font-sans overflow-x-hidden">
       <motion.div 
         initial={{ opacity: 1 }}
         animate={{ opacity: isLoaded ? 0 : 1 }}
         transition={{ duration: 0.8 }}
-        className="fixed inset-0 z-[2000] bg-[#fafafa] flex items-center justify-center"
+        className="fixed inset-0 z-[2000] bg-[#f8f6f3] flex items-center justify-center"
       >
         <motion.div
           animate={{ opacity: [0.3, 1, 0.3], scale: [1, 1.05, 1] }}
           transition={{ duration: 2, repeat: Infinity }}
           className="text-5xl font-bold tracking-widest text-[#1a1a1a]/80"
         >
-          7×7=49
+          $49
         </motion.div>
+      </motion.div>
+
+      <motion.div 
+        style={{ y: bgY }}
+        className="fixed inset-0 pointer-events-none opacity-[0.03]"
+      >
+        <img src="/7x7/Screenshot 2026-04-17 234716.png" alt="" className="w-full h-full object-cover" />
       </motion.div>
 
       <motion.nav 
         initial={{ y: -100 }}
         animate={{ y: 0 }}
         transition={{ delay: 0.5, duration: 0.6 }}
-        className="fixed top-0 left-0 right-0 z-50 py-5 px-8 bg-[#fafafa]/80 backdrop-blur-md border-b border-[#1a1a1a]/5"
+        className="fixed top-0 left-0 right-0 z-50 py-4 px-6 bg-[#f8f6f3]/85 backdrop-blur-sm border-b border-[#1a1a1a]/5"
       >
         <div className="max-w-6xl mx-auto flex items-center justify-between">
-          <span className="text-lg font-medium tracking-widest text-[#1a1a1a]/70">7×7=49</span>
-          <a href="https://x.com/49onchain" target="_blank" rel="noopener noreferrer" className="text-sm text-[#1a1a1a]/40 hover:text-[#1a1a1a] transition-colors">
-            X
-          </a>
+          <div className="flex items-center gap-4">
+            <span className="text-xl font-semibold tracking-wide text-[#1a1a1a]">$49</span>
+            <span className="text-xs text-[#1a1a1a]/30 px-2 py-0.5 bg-[#1a1a1a]/5 rounded">SOL</span>
+          </div>
+          <div className="flex items-center gap-6">
+            <a href="#numbers" className="text-sm text-[#1a1a1a]/50 hover:text-[#1a1a1a] transition-colors">Numbers</a>
+            <a href="#timeline" className="text-sm text-[#1a1a1a]/50 hover:text-[#1a1a1a] transition-colors">Timeline</a>
+            <a href="https://x.com/49onchain" target="_blank" rel="noopener noreferrer" className="text-sm text-[#1a1a1a]/40 hover:text-[#1a1a1a] transition-colors flex items-center gap-1">
+              <svg viewBox="0 0 24 24" className="w-4 h-4" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+            </a>
+          </div>
         </div>
       </motion.nav>
 
       <section className="relative h-screen flex items-center justify-center overflow-hidden">
-        <motion.div style={{ y: y1, scale: heroScale }} className="absolute inset-0 pointer-events-none">
+        <motion.div style={{ y: y1 }} className="absolute inset-0 pointer-events-none">
           <div className="absolute inset-0">
             <img 
               src="/7x7/Screenshot 2026-04-17 234716.png" 
               alt="" 
-              className="w-full h-full object-cover opacity-30 blur-[2px] scale-105"
+              className="w-full h-full object-cover opacity-25 blur-[1px] scale-110"
             />
           </div>
-          <div className="absolute inset-0 bg-gradient-to-b from-[#fafafa]/40 via-transparent to-[#fafafa]" />
-        </motion.div>
-        
-        <motion.div style={{ y: y2 }} className="absolute inset-0 pointer-events-none">
-          <div className="absolute top-1/4 right-1/4 w-[300px] h-[300px] rounded-full bg-[#1a1a1a]/5 blur-[150px]" />
-          <div className="absolute bottom-1/4 left-1/4 w-[250px] h-[250px] rounded-full bg-[#1a1a1a]/5 blur-[120px]" />
+          <div className="absolute inset-0 bg-gradient-to-b from-[#f8f6f3]/50 via-[#f8f6f3]/20 to-[#f8f6f3]" />
         </motion.div>
 
         <div className="absolute inset-0 z-10">
           <video 
             ref={videoRef}
             src="/7x7/tiktok_aascinema_7628095588139126049.mp4"
-            className="w-full h-full object-cover opacity-40 mix-blend-multiply"
+            className="w-full h-full object-cover opacity-20 mix-blend-multiply"
             autoPlay
             muted
             loop
             playsInline
           />
-          <div className="absolute inset-0 bg-gradient-to-b from-[#fafafa]/60 via-[#fafafa]/30 to-[#fafafa]" />
+          <div className="absolute inset-0 bg-gradient-to-b from-[#f8f6f3]/70 via-[#f8f6f3]/40 to-[#f8f6f3]" />
+        </div>
+
+        <div className="absolute inset-0 pointer-events-none opacity-[0.02]">
+          <img src="/7x7/Screenshot 2026-04-17 234852.png" alt="" className="w-full h-full object-cover" />
         </div>
 
         <div className="relative z-20 text-center px-6 max-w-4xl">
@@ -99,7 +111,7 @@ function App() {
             transition={{ delay: 0.6, duration: 0.8, ease: "easeOut" }}
             className="text-7xl md:text-9xl lg:text-[10rem] font-bold tracking-tighter mb-4 text-[#1a1a1a]"
           >
-            7×7=49
+            $49
           </motion.h1>
           
           <motion.p 
@@ -131,7 +143,7 @@ function App() {
         </motion.div>
       </section>
 
-      <section className="py-32 px-6 bg-white">
+      <section id="numbers" className="py-32 px-6">
         <div className="max-w-5xl mx-auto">
           <motion.h2 
             initial={{ opacity: 0, y: 30 }}
@@ -160,7 +172,29 @@ function App() {
         </div>
       </section>
 
-      <section className="py-32 px-6 bg-[#f5f5f5]">
+      <section className="py-20 px-6">
+        <div className="max-w-4xl mx-auto">
+          <motion.div 
+            initial={{ opacity: 0, scale: 0.98 }}
+            whileInView={{ opacity: 1, scale: 1 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.8 }}
+            className="relative aspect-[2/1] rounded-2xl overflow-hidden"
+          >
+            <img 
+              src="/7x7/image.png" 
+              alt="The meme" 
+              className="w-full h-full object-cover opacity-60"
+            />
+            <div className="absolute inset-0 bg-gradient-to-r from-[#f8f6f3]/30 via-transparent to-[#f8f6f3]/30" />
+            <div className="absolute inset-0 flex items-center justify-center">
+              <p className="text-4xl md:text-5xl font-light text-[#1a1a1a]/40 tracking-widest">7×7=49</p>
+            </div>
+          </motion.div>
+        </div>
+      </section>
+
+      <section id="timeline" className="py-32 px-6 bg-[#f5f3f0]">
         <div className="max-w-3xl mx-auto">
           <motion.h2 
             initial={{ opacity: 0, y: 30 }}
@@ -189,7 +223,7 @@ function App() {
         </div>
       </section>
 
-      <section className="py-40 px-6 bg-white">
+      <section className="py-40 px-6">
         <div className="max-w-4xl mx-auto text-center">
           <motion.div
             initial={{ opacity: 0, scale: 0.9 }}
@@ -198,20 +232,20 @@ function App() {
             transition={{ duration: 0.8 }}
           >
             <p className="text-6xl md:text-8xl font-bold tracking-tight mb-8">
-              7×7=49
+              $49
             </p>
             <p className="text-[#1a1a1a]/40 text-lg">That's it. That's the meme.</p>
           </motion.div>
         </div>
       </section>
 
-      <section className="py-20 px-6 bg-[#f5f5f5]">
+      <section className="py-20 px-6">
         <div className="max-w-2xl mx-auto">
           <motion.div 
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            className="bg-white border border-[#1a1a1a]/10 p-8 rounded-xl"
+            className="bg-white/50 border border-[#1a1a1a]/10 p-8 rounded-xl"
           >
             <div className="text-xs text-[#1a1a1a]/40 mb-4 tracking-widest">TOKEN</div>
             <div className="flex flex-wrap gap-3 mb-6">
@@ -226,7 +260,7 @@ function App() {
 
       <footer className="py-12 px-6 border-t border-[#1a1a1a]/5">
         <div className="max-w-6xl mx-auto flex flex-col md:flex-row items-center justify-between gap-4">
-          <p className="text-xs text-[#1a1a1a]/20">7×7=49 — The Equation</p>
+          <p className="text-xs text-[#1a1a1a]/20">$49 — The Equation</p>
           <a href="https://x.com/49onchain" target="_blank" rel="noopener noreferrer" className="text-xs text-[#1a1a1a]/30 hover:text-[#1a1a1a] transition-colors">
             X
           </a>
