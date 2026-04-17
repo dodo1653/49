@@ -104,7 +104,7 @@ function App() {
           <div className="mt-12 bg-white/5 border border-white/10 rounded-full px-8 py-4 max-w-lg mx-auto backdrop-blur-sm opacity-0 animate-fade-in" style={{ animationDelay: '0.5s' }}>
             <div className="flex items-center justify-center gap-3">
               <span className="text-xs text-white/30 uppercase tracking-widest">CA</span>
-              <span className="text-sm font-mono text-white/40">Coming soon...</span>
+              <span className="text-sm font-mono text-white/40 select-all">97PGWGgGJorRwwYgNqF5Z68SqwoyiuT2UjumzSjDpump</span>
             </div>
           </div>
         </div>
