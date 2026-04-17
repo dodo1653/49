@@ -14,6 +14,13 @@ function App() {
     setTimeout(() => setIsLoaded(true), 1000)
   }, [])
 
+  const scrollToSection = (id) => {
+    const element = document.getElementById(id)
+    if (element) {
+      element.scrollIntoView({ behavior: 'smooth' })
+    }
+  }
+
   const stats = [
     { value: "38M+", label: "Views on original" },
     { value: "69K+", label: "Likes on viral post" },
@@ -30,15 +37,8 @@ function App() {
     { date: "NOW", event: "7×7=49. The equation wins. Always has." }
   ]
 
-  const scrollToSection = (id) => {
-    const element = document.getElementById(id)
-    if (element) {
-      element.scrollIntoView({ behavior: 'smooth' })
-    }
-  }
-
   return (
-    <div className="min-h-screen bg-[#1a1816] text-[#e8e6e3] font-sans overflow-x-hidden">
+    <div className="min-h-screen bg-[#1a1816] text-[#e8e6e3] font-sans">
       <motion.div 
         initial={{ opacity: 1 }}
         animate={{ opacity: isLoaded ? 0 : 1 }}
@@ -75,22 +75,37 @@ function App() {
         <img src="/7x7/Screenshot 2026-04-17 234716.png" alt="" className="w-full h-full object-cover" />
       </motion.div>
 
-      <div className="fixed top-0 left-0 right-0 z-50 py-4 px-6 bg-[#1a1816]/90 backdrop-blur-md border-b border-[#e8e6e3]/5">
-        <div className="max-w-6xl mx-auto flex items-center justify-between gap-4">
-          <div className="flex items-center gap-4 cursor-pointer" onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}>
-            <span className="text-xl font-semibold tracking-wide text-[#e8e6e3]">$49</span>
+      <nav className="fixed top-0 left-0 right-0 z-50 py-4 px-6 bg-[#1a1816]/90 backdrop-blur-md border-b border-[#e8e6e3]/5">
+        <div className="max-w-6xl mx-auto flex items-center justify-between">
+          <div className="flex items-center gap-4">
+            <span 
+              onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
+              className="text-xl font-semibold tracking-wide text-[#e8e6e3] cursor-pointer"
+            >
+              $49
+            </span>
             <span className="text-xs text-[#e8e6e3]/30 px-2 py-0.5 bg-[#e8e6e3]/5 rounded">SOL</span>
           </div>
 
           <div className="flex items-center gap-6">
-            <button onClick={() => scrollToSection('numbers')} className="text-sm text-[#e8e6e3]/50 hover:text-[#e8e6e3] transition-colors bg-transparent border-none cursor-pointer">Numbers</button>
-            <button onClick={() => scrollToSection('timeline')} className="text-sm text-[#e8e6e3]/50 hover:text-[#e8e6e3] transition-colors bg-transparent border-none cursor-pointer">Timeline</button>
+            <span 
+              onClick={() => scrollToSection('numbers')}
+              className="text-sm text-[#e8e6e3]/50 hover:text-[#e8e6e3] cursor-pointer transition-colors"
+            >
+              Numbers
+            </span>
+            <span 
+              onClick={() => scrollToSection('timeline')}
+              className="text-sm text-[#e8e6e3]/50 hover:text-[#e8e6e3] cursor-pointer transition-colors"
+            >
+              Timeline
+            </span>
             <a href="https://x.com/49onchain" target="_blank" rel="noopener noreferrer" className="text-sm text-[#e8e6e3]/40 hover:text-[#e8e6e3] transition-colors flex items-center gap-1">
               <svg viewBox="0 0 24 24" className="w-4 h-4" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
             </a>
           </div>
         </div>
-      </div>
+      </nav>
 
       <section className="relative h-screen flex items-center justify-center overflow-hidden">
         <motion.div style={{ y: y1 }} className="absolute inset-0 pointer-events-none">
@@ -240,7 +255,7 @@ function App() {
         </div>
       </section>
 
-      <section className="py-40 px-6">
+      <section className="py-20 px-6">
         <div className="max-w-4xl mx-auto text-center">
           <motion.div
             initial={{ opacity: 0, scale: 0.9 }}
@@ -252,11 +267,43 @@ function App() {
               7×7=49
             </p>
             <p className="text-[#e8e6e3]/40 text-lg">Tokenized on Solana</p>
-            <div className="mt-6 flex justify-center">
-              <svg className="w-12 h-12 text-[#e8e6e3]/30" viewBox="0 0 24 24" fill="currentColor">
-                <path d="M11.752 2.94c.322.18.714.18 1.036 0l4.85 2.8c.322.186.322.488 0 .674l-4.85 2.8c-.322.186-.714.186-1.036 0l-4.85-2.8c-.322-.186-.322-.488 0-.674l4.85-2.8zM17.322 3.576c.322-.186.322-.488 0-.674l-4.85-2.8c-.322-.186-.714-.186-1.036 0l-4.85 2.8c-.322.186-.322.488 0 .674l4.85 2.8c.322.186.714.186 1.036 0l4.85-2.8zM6.678 20.424c.322.18.714.18 1.036 0l4.85-2.8c.322-.186.322-.488 0-.674l-4.85-2.8c-.322-.186-.714-.186-1.036 0l-4.85 2.8c-.322.186-.322.488 0 .674l4.85 2.8zM6.678 3.576c-.322.186-.714.186-1.036 0l-4.85 2.8c-.322.186-.322.488 0 .674l4.85 2.8c.322.186.714.186 1.036 0l4.85-2.8c.322-.186.322-.488 0-.674l-4.85-2.8z"/>
+            
+            <div className="mt-8 flex justify-center">
+              <svg className="w-16 h-16 text-[#e8e6e3]/40" viewBox="0 0 60 60" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M30 5L55 45H5L30 5Z" fill="currentColor" fillOpacity="0.9"/>
+                <path d="M30 15L45 40H15L30 15Z" fill="#1a1816" fillOpacity="0.3"/>
               </svg>
             </div>
+
+            <div className="mt-12">
+              <a 
+                href="https://x.com/dilvexed/status/2040175730810876271" 
+                target="_blank" 
+                rel="noopener noreferrer"
+                className="block max-w-md mx-auto bg-[#e8e6e3]/5 border border-[#e8e6e3]/10 rounded-xl p-6 hover:bg-[#e8e6e3]/8 transition-colors text-left"
+              >
+                <div className="flex items-center gap-3 mb-4">
+                  <div className="w-10 h-10 bg-[#e8e6e3]/20 rounded-full flex items-center justify-center">
+                    <svg className="w-5 h-5 text-[#e8e6e3]/60" viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+                  </div>
+                  <div>
+                    <p className="text-sm font-semibold text-[#e8e6e3]">dilvexed</p>
+                    <p className="text-xs text-[#e8e6e3]/40">@dilvexed</p>
+                  </div>
+                </div>
+                <p className="text-[#e8e6e3]/80 text-xl mb-3">why is 7×7=49 so fucking hot</p>
+                <p className="text-xs text-[#e8e6e3]/40">69K likes · April 3, 2026</p>
+              </a>
+            </div>
+
+            <a 
+              href="https://www.tiktok.com/search?q=7x7%3D49&t=1776460964757" 
+              target="_blank" 
+              rel="noopener noreferrer"
+              className="inline-block mt-8 text-sm text-[#e8e6e3]/40 hover:text-[#e8e6e3]/60 transition-colors underline underline-offset-4"
+            >
+              Check 49's virality
+            </a>
           </motion.div>
         </div>
       </section>
@@ -277,39 +324,6 @@ function App() {
             <div className="text-xs text-[#e8e6e3]/30 mb-2">CONTRACT ADDRESS</div>
             <p className="text-sm font-mono text-[#e8e6e3]/50 select-all">Coming soon...</p>
           </motion.div>
-        </div>
-      </section>
-
-      <section className="py-20 px-6 bg-[#141211]">
-        <div className="max-w-3xl mx-auto">
-          <motion.h2 
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            className="text-2xl font-light text-center mb-12 text-[#e8e6e3]/60"
-          >
-            THE VIRAL POST
-          </motion.h2>
-          <div className="flex justify-center">
-            <a 
-              href="https://x.com/dilvexed/status/2040175730810876271" 
-              target="_blank" 
-              rel="noopener noreferrer"
-              className="block max-w-[550px] bg-[#e8e6e3]/5 border border-[#e8e6e3]/10 rounded-xl p-4 hover:bg-[#e8e6e3]/8 transition-colors"
-            >
-              <div className="flex items-center gap-3 mb-3">
-                <div className="w-10 h-10 bg-[#e8e6e3]/20 rounded-full flex items-center justify-center">
-                  <svg className="w-5 h-5 text-[#e8e6e3]/60" viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
-                </div>
-                <div>
-                  <p className="text-sm font-semibold text-[#e8e6e3]">dilvexed</p>
-                  <p className="text-xs text-[#e8e6e3]/40">@dilvexed</p>
-                </div>
-              </div>
-              <p className="text-[#e8e6e3]/80 text-lg mb-3">why is 7×7=49 so fucking hot</p>
-              <p className="text-xs text-[#e8e6e3]/40">69K likes · April 3, 2026</p>
-            </a>
-          </div>
         </div>
       </section>
 
