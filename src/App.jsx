@@ -89,14 +89,8 @@ function App() {
 
       <section className="py-24 px-6">
         <div className="max-w-5xl mx-auto">
-          <motion.div 
-            initial={{ opacity: 0, scale: 0.96 }}
-            whileInView={{ opacity: 1, scale: 1 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.8 }}
-            className="relative aspect-[16/9] rounded-3xl overflow-hidden group cursor-pointer"
-            onClick={() => window.open('https://www.tiktok.com/search?q=7x7%3D49&t=1776460964757', '_blank')}
-          >
+          <div className="relative aspect-[16/9] rounded-3xl overflow-hidden group cursor-pointer opacity-0 animate-fade-in" style={{ animationDelay: '0.2s' }}
+            onClick={() => window.open('https://www.tiktok.com/search?q=7x7%3D49&t=1776460964757', '_blank')}>
             <img src="/7x7/image.png" alt="" className="w-full h-full object-cover opacity-50 group-hover:opacity-60 transition-opacity" />
             <div className="absolute inset-0 bg-gradient-to-t from-[#0d0b0a] via-transparent to-[#0d0b0a]/50" />
             <div className="absolute inset-0 flex flex-col items-center justify-center gap-4">
@@ -105,20 +99,14 @@ function App() {
                 <path d="M19.59 6.69a4.83 4.83 0 01-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 01-5.2 1.74 2.89 2.89 0 012.31-4.64 2.93 2.93 0 01.88.13V9.4a6.84 6.84 0 00-1-.05A6.33 6.33 0 005 20.1a6.34 6.34 0 0010.86-4.43v-7a8.16 8.16 0 004.77 1.52v-3.4a4.85 4.85 0 01-1-.1z"/>
               </svg>
             </div>
-          </motion.div>
+          </div>
 
-          <motion.div 
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ delay: 0.3 }}
-            className="mt-12 bg-white/5 border border-white/10 rounded-full px-8 py-4 max-w-lg mx-auto backdrop-blur-sm"
-          >
+          <div className="mt-12 bg-white/5 border border-white/10 rounded-full px-8 py-4 max-w-lg mx-auto backdrop-blur-sm opacity-0 animate-fade-in" style={{ animationDelay: '0.5s' }}>
             <div className="flex items-center justify-center gap-3">
               <span className="text-xs text-white/30 uppercase tracking-widest">CA</span>
               <span className="text-sm font-mono text-white/40">Coming soon...</span>
             </div>
-          </motion.div>
+          </div>
         </div>
       </section>
 
