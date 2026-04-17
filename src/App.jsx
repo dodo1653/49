@@ -1,9 +1,8 @@
-import { useEffect, useState, useRef } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { motion, useScroll, useTransform } from 'framer-motion'
 import Lenis from 'lenis'
 
 function App() {
-  const [isLoaded, setIsLoaded] = useState(false)
   const videoRef = useRef(null)
   const { scrollY } = useScroll()
   
@@ -17,60 +16,27 @@ function App() {
       requestAnimationFrame(raf)
     }
     requestAnimationFrame(raf)
-    
-    setTimeout(() => setIsLoaded(true), 1800)
     return () => lenis.destroy()
   }, [])
 
-  const scrollToTop = () => {
-    window.scrollTo({ top: 0, behavior: 'smooth' })
-  }
-
   return (
     <div className="min-h-screen bg-[#0d0b0a] text-[#e8e6e3] font-sans selection:bg-white/10">
-      <motion.div 
-        initial={{ opacity: 1 }}
-        animate={{ opacity: isLoaded ? 0 : 1 }}
-        transition={{ duration: 0.8 }}
-        className="fixed inset-0 z-[9999] bg-[#0d0b0a]"
-      >
-        <div className="absolute inset-0">
-          <img 
-            src="/7x7/image.png" 
-            alt="" 
-            className="w-full h-full object-cover opacity-40"
-          />
-          <div className="absolute inset-0 bg-gradient-to-t from-[#0d0b0a] via-[#0d0b0a]/70 to-[#0d0b0a]" />
-        </div>
-        <div className="relative z-10 h-full flex items-center justify-center">
-          <motion.p 
-            animate={{ opacity: [0.5, 1, 0.5] }}
-            transition={{ duration: 2, repeat: Infinity }}
-            className="text-8xl md:text-[6rem] font-bold tracking-wider text-white/90"
-          >
-            7×7=49
-          </motion.p>
-        </div>
-      </motion.div>
-
-      <nav className="fixed top-0 left-0 right-0 z-50 py-5 px-4">
-        <div className="flex items-center justify-center gap-8">
+      <nav className="fixed top-0 left-0 right-0 z-50 py-6 px-8 bg-[#0d0b0a]/50 backdrop-blur-md border-b border-white/5">
+        <div className="max-w-6xl mx-auto flex items-center justify-between">
           <button 
-            onClick={scrollToTop}
-            className="text-lg font-bold text-white/70 hover:text-white transition-colors"
+            onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
+            className="text-xl font-bold text-white tracking-wide hover:text-white/80 transition-colors"
           >
             $49
           </button>
-          <div className="flex items-center gap-6">
-            <a 
-              href="https://x.com/49onchain" 
-              target="_blank" 
-              rel="noopener noreferrer"
-              className="text-sm text-white/40 hover:text-white/70 transition-colors"
-            >
-              X
-            </a>
-          </div>
+          <a 
+            href="https://x.com/49onchain" 
+            target="_blank" 
+            rel="noopener noreferrer"
+            className="text-sm text-white/40 hover:text-white/70 transition-colors"
+          >
+            X
+          </a>
         </div>
       </nav>
 
@@ -107,7 +73,7 @@ function App() {
           <motion.h1 
             initial={{ opacity: 0, y: 80 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.2, duration: 1, ease: [0.16, 1, 0.3, 1] }}
+            transition={{ duration: 1, ease: [0.16, 1, 0.3, 1] }}
             className="text-8xl md:text-[7rem] lg:text-[9rem] font-bold tracking-tighter text-white mb-2"
           >
             7×7=49
@@ -116,7 +82,7 @@ function App() {
           <motion.p 
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
-            transition={{ delay: 0.5, duration: 0.8 }}
+            transition={{ delay: 0.3, duration: 0.8 }}
             className="text-xl md:text-2xl text-white/40 font-light tracking-wide"
           >
             The equation that will steal your girl
@@ -125,7 +91,7 @@ function App() {
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.8, duration: 0.6 }}
+            transition={{ delay: 0.6, duration: 0.6 }}
             className="mt-16"
           >
             <div className="inline-flex items-center gap-4 px-6 py-3 bg-white/5 backdrop-blur-sm rounded-full border border-white/8">
