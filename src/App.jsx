@@ -23,7 +23,7 @@ function App() {
     <div className="min-h-screen bg-[#0d0b0a] text-[#e8e6e3] font-sans selection:bg-white/10">
       <nav className="fixed top-0 left-0 right-0 z-50 py-6 px-4">
         <div className="flex items-center justify-center">
-          <div className="flex items-center gap-4 px-6 py-2 bg-[#0d0b0a]/50 backdrop-blur-md rounded-full border border-white/5">
+          <div className="flex items-center gap-8 px-20 py-3 bg-[#0d0b0a]/50 backdrop-blur-md rounded-full border border-white/5">
             <button 
               onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
               className="flex items-center gap-2 text-lg font-bold text-white tracking-wide hover:text-white/80 transition-colors"
@@ -78,31 +78,31 @@ function App() {
             initial={{ opacity: 0, y: 80 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 1, ease: [0.16, 1, 0.3, 1] }}
-            className="text-8xl md:text-[7rem] lg:text-[9rem] font-bold tracking-tighter text-white mb-2"
+            className="text-8xl md:text-[7rem] lg:text-[9rem] font-bold tracking-tighter text-white mb-6"
           >
             7×7=49
           </motion.h1>
+
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.4, duration: 0.6 }}
+            className="mb-8"
+          >
+            <div className="inline-flex items-center gap-4 px-6 py-3 bg-white/5 backdrop-blur-sm rounded-full border border-white/8">
+              <span className="w-2 h-2 bg-white/60 rounded-full" />
+              <span className="text-sm text-white/50 font-mono tracking-wide">38M+ views across platforms</span>
+            </div>
+          </motion.div>
           
           <motion.p 
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
-            transition={{ delay: 0.3, duration: 0.8 }}
+            transition={{ delay: 0.6, duration: 0.8 }}
             className="text-xl md:text-2xl text-white/40 font-light tracking-wide"
           >
             The equation that will steal your girl
           </motion.p>
-
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.6, duration: 0.6 }}
-            className="mt-16"
-          >
-            <div className="inline-flex items-center gap-4 px-6 py-3 bg-white/5 backdrop-blur-sm rounded-full border border-white/8">
-              <span className="w-2 h-2 bg-white/60 rounded-full animate-pulse" />
-              <span className="text-sm text-white/50 font-mono tracking-wide">38M+ views across platforms</span>
-            </div>
-          </motion.div>
         </div>
 
         <motion.div style={{ opacity: heroOpacity }} className="absolute bottom-12 left-1/2 -translate-x-1/2 z-10">
@@ -141,9 +141,12 @@ function App() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ delay: 0.3 }}
-            className="mt-12 bg-white/5 border border-white/10 rounded-2xl p-6 max-w-md mx-auto"
+            className="mt-12 bg-white/5 border border-white/10 rounded-2xl p-8 max-w-lg mx-auto backdrop-blur-sm"
           >
-            <div className="text-xs text-white/30 mb-4 tracking-widest uppercase">Contract Address</div>
+            <div className="flex items-center justify-between mb-4">
+              <div className="text-xs text-white/30 tracking-widest uppercase">Contract Address</div>
+              <span className="text-xs text-white/20 bg-white/5 px-2 py-1 rounded">SOL</span>
+            </div>
             <p className="text-sm font-mono text-white/40 select-all">Coming soon...</p>
           </motion.div>
         </div>
