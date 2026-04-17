@@ -1,6 +1,5 @@
 import { useEffect, useState, useRef } from 'react'
 import { motion, useScroll, useTransform } from 'framer-motion'
-import Lenis from 'lenis'
 
 function App() {
   const [isLoaded, setIsLoaded] = useState(false)
@@ -12,26 +11,10 @@ function App() {
   const bgY = useTransform(scrollY, [0, 2000], [0, 50])
 
   useEffect(() => {
-    const lenis = new Lenis()
-    function raf(time) {
-      lenis.raf(time)
-      requestAnimationFrame(raf)
-    }
-    requestAnimationFrame(raf)
-    
-    const timer = setTimeout(() => setIsLoaded(true), 1500)
-    return () => {
-      lenis.destroy()
-      clearTimeout(timer)
-    }
+    setTimeout(() => setIsLoaded(true), 1000)
   }, [])
 
-  const scrollToSection = (id) => {
-    const element = document.getElementById(id)
-    if (element) {
-      element.scrollIntoView({ behavior: 'smooth' })
-    }
-  }
+  
 
   const stats = [
     { value: "38M+", label: "Views on original" },
@@ -50,82 +33,50 @@ function App() {
   ]
 
   return (
-    <div className="min-h-screen bg-[#1a1816] text-[#e8e6e3] font-sans">
+    <div className="min-h-screen bg-[#1a1816] text-[#e8e6e3] font-sans overflow-x-hidden">
       <motion.div 
         initial={{ opacity: 1 }}
         animate={{ opacity: isLoaded ? 0 : 1 }}
         transition={{ duration: 0.8 }}
-        className="fixed inset-0 z-[9999] bg-[#1a1816] flex items-center justify-center overflow-hidden pointer-events-none"
+        className="fixed inset-0 z-[2000] bg-[#1a1816] flex items-center justify-center"
       >
-        <div className="absolute inset-0">
-          <img 
-            src="/7x7/image.png" 
-            alt="" 
-            className="w-full h-full object-cover opacity-30 scale-110"
-          />
-          <div className="absolute inset-0 bg-[#1a1816]/50" />
-        </div>
         <motion.div
-          initial={{ scale: 0.8, opacity: 0 }}
-          animate={{ scale: 1, opacity: 1 }}
-          transition={{ duration: 0.5 }}
-          className="relative z-10 text-center"
+          animate={{ opacity: [0.3, 1, 0.3], scale: [1, 1.05, 1] }}
+          transition={{ duration: 2, repeat: Infinity }}
+          className="text-5xl font-bold tracking-widest text-[#e8e6e3]/80"
         >
-          <motion.p 
-            initial={{ opacity: 0 }}
-            animate={{ opacity: [0.3, 1, 0.3] }}
-            transition={{ duration: 2, repeat: Infinity }}
-            className="text-6xl md:text-8xl font-bold tracking-widest text-[#e8e6e3]/80"
-          >
-            7×7=49
-          </motion.p>
-          <motion.div 
-            initial={{ width: 0 }}
-            animate={{ width: ["0%", "100%"] }}
-            transition={{ duration: 1.5, delay: 0.3 }}
-            className="h-px bg-[#e8e6e3]/30 mx-auto mt-6 max-w-xs"
-          />
+          7×7=49
         </motion.div>
       </motion.div>
 
-      <motion.div style={{ y: bgY }} className="fixed inset-0 -z-10 opacity-[0.04] pointer-events-none">
+      <motion.div 
+        style={{ y: bgY }}
+        className="fixed inset-0 pointer-events-none opacity-[0.04]"
+      >
         <img src="/7x7/Screenshot 2026-04-17 234716.png" alt="" className="w-full h-full object-cover" />
       </motion.div>
 
-      <header className="fixed top-0 left-0 right-0 z-50 py-5 px-8 bg-[#1a1816]/80 backdrop-blur-lg border-b border-white/5">
-        <div className="max-w-6xl mx-auto flex items-center justify-between">
-          <div 
-            onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
-            className="cursor-pointer flex items-center gap-3"
-          >
-            <span className="text-2xl font-bold text-[#e8e6e3] tracking-wide">$49</span>
-            <span className="text-xs text-[#e8e6e3]/40 px-2 py-1 bg-white/5 rounded font-medium">SOL</span>
+      <motion.nav 
+        initial={{ y: -100 }}
+        animate={{ y: 0 }}
+        transition={{ delay: 0.5, duration: 0.6 }}
+        className="fixed top-0 left-0 right-0 z-50 py-4 px-6 bg-[#1a1816]/90 backdrop-blur-md border-b border-[#e8e6e3]/5"
+      >
+        <div className="max-w-6xl mx-auto flex items-center justify-between gap-4">
+          <div className="flex items-center gap-4">
+            <span className="text-xl font-semibold tracking-wide text-[#e8e6e3]">$49</span>
+            <span className="text-xs text-[#e8e6e3]/30 px-2 py-0.5 bg-[#e8e6e3]/5 rounded">SOL</span>
           </div>
-          
-          <div className="flex items-center gap-8">
-            <button 
-              onClick={() => scrollToSection('numbers')}
-              className="text-sm text-[#e8e6e3]/50 hover:text-[#e8e6e3] transition-colors"
-            >
-              Numbers
-            </button>
-            <button 
-              onClick={() => scrollToSection('timeline')}
-              className="text-sm text-[#e8e6e3]/50 hover:text-[#e8e6e3] transition-colors"
-            >
-              Timeline
-            </button>
-            <a 
-              href="https://x.com/49onchain" 
-              target="_blank" 
-              rel="noopener noreferrer"
-              className="text-sm text-[#e8e6e3]/40 hover:text-[#e8e6e3] transition-colors"
-            >
-              X
+
+          <div className="flex items-center gap-6">
+            <a href="#numbers" className="text-sm text-[#e8e6e3]/50 hover:text-[#e8e6e3] transition-colors">Numbers</a>
+            <a href="#timeline" className="text-sm text-[#e8e6e3]/50 hover:text-[#e8e6e3] transition-colors">Timeline</a>
+            <a href="https://x.com/49onchain" target="_blank" rel="noopener noreferrer" className="text-sm text-[#e8e6e3]/40 hover:text-[#e8e6e3] transition-colors flex items-center gap-1">
+              <svg viewBox="0 0 24 24" className="w-4 h-4" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
             </a>
           </div>
         </div>
-      </header>
+      </motion.nav>
 
       <section className="relative h-screen flex items-center justify-center overflow-hidden">
         <motion.div style={{ y: y1 }} className="absolute inset-0 pointer-events-none">
@@ -139,7 +90,7 @@ function App() {
           <div className="absolute inset-0 bg-gradient-to-b from-[#1a1816]/60 via-[#1a1816]/30 to-[#1a1816]" />
         </motion.div>
 
-        <div className="absolute inset-0 z-0">
+        <div className="absolute inset-0 z-10">
           <video 
             ref={videoRef}
             src="/7x7/tiktok_aascinema_7628095588139126049.mp4"
@@ -152,16 +103,16 @@ function App() {
           <div className="absolute inset-0 bg-gradient-to-b from-[#1a1816]/70 via-[#1a1816]/50 to-[#1a1816]" />
         </div>
 
-        <div className="absolute inset-0 pointer-events-none opacity-[0.03] z-0">
+        <div className="absolute inset-0 pointer-events-none opacity-[0.03]">
           <img src="/7x7/Screenshot 2026-04-17 234852.png" alt="" className="w-full h-full object-cover" />
         </div>
 
-        <div className="relative z-10 text-center px-6 max-w-4xl -mt-20">
+        <div className="relative z-20 text-center px-6 max-w-4xl -mt-24">
           <motion.h1 
             initial={{ opacity: 0, y: 60 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.3, duration: 0.8 }}
-            className="text-7xl md:text-9xl lg:text-[10rem] font-bold tracking-tighter mb-4 text-[#e8e6e3]"
+            transition={{ delay: 0.6, duration: 0.8, ease: "easeOut" }}
+            className="text-6xl md:text-8xl lg:text-[9rem] font-bold tracking-tight mb-3 text-[#e8e6e3]"
           >
             7×7=49
           </motion.h1>
@@ -169,42 +120,44 @@ function App() {
           <motion.p 
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
-            transition={{ delay: 0.6 }}
-            className="text-xl text-[#e8e6e3]/50 font-light"
+            transition={{ delay: 1, duration: 0.8 }}
+            className="text-lg md:text-xl text-[#e8e6e3]/50 font-light"
           >
             The equation that will steal your girl
           </motion.p>
 
           <motion.div
-            initial={{ opacity: 0, y: 20 }}
+            initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.9 }}
-            className="mt-12"
+            transition={{ delay: 1.4, duration: 0.6 }}
+            className="mt-10"
           >
-            <div className="inline-flex items-center gap-3 px-6 py-3 bg-white/5 rounded-full border border-white/10">
-              <span className="w-2 h-2 bg-white/60 rounded-full animate-pulse" />
-              <span className="text-sm text-white/60 font-mono">38M+ views across platforms</span>
+            <div className="inline-flex items-center gap-3 px-5 py-2.5 bg-[#e8e6e3]/5 rounded-full border border-[#e8e6e3]/10">
+              <span className="w-2 h-2 bg-[#e8e6e3]/60 rounded-full" />
+              <span className="text-sm text-[#e8e6e3]/60 font-mono">38M+ views across platforms</span>
             </div>
           </motion.div>
         </div>
 
-        <motion.div style={{ opacity: heroOpacity }} className="absolute bottom-10 left-1/2 -translate-x-1/2 z-10">
-          <div className="text-white/20 text-3xl">↓</div>
+        <motion.div style={{ opacity: heroOpacity }} className="absolute bottom-12 left-1/2 -translate-x-1/2 z-20">
+          <motion.div animate={{ y: [0, 8, 0] }} transition={{ duration: 1.5, repeat: Infinity }} className="text-[#e8e6e3]/20 text-2xl">
+            ↓
+          </motion.div>
         </motion.div>
       </section>
 
-      <section id="numbers" className="py-40 px-6">
+      <section id="numbers" className="py-32 px-6">
         <div className="max-w-5xl mx-auto">
           <motion.h2 
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            className="text-4xl font-light text-center mb-16 text-[#e8e6e3]"
+            className="text-3xl font-light text-center mb-20 tracking-wide text-[#e8e6e3]"
           >
             THE NUMBERS
           </motion.h2>
 
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
             {stats.map((stat, i) => (
               <motion.div
                 key={i}
@@ -212,9 +165,9 @@ function App() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ delay: i * 0.1 }}
-                className="text-center"
+                className="text-center p-6"
               >
-                <p className="text-5xl md:text-6xl font-light text-[#e8e6e3]/90 mb-2">{stat.value}</p>
+                <p className="text-4xl md:text-5xl font-light text-[#e8e6e3]/90 mb-2">{stat.value}</p>
                 <p className="text-sm text-[#e8e6e3]/40">{stat.label}</p>
               </motion.div>
             ))}
@@ -231,27 +184,31 @@ function App() {
             transition={{ duration: 0.8 }}
             className="relative aspect-[2/1] rounded-2xl overflow-hidden"
           >
-            <img src="/7x7/image.png" alt="The meme" className="w-full h-full object-cover opacity-40" />
-            <div className="absolute inset-0 bg-gradient-to-r from-[#1a1816]/50 via-transparent to-[#1a1816]/50" />
+            <img 
+              src="/7x7/image.png" 
+              alt="The meme" 
+              className="w-full h-full object-cover opacity-50"
+            />
+            <div className="absolute inset-0 bg-gradient-to-r from-[#1a1816]/30 via-transparent to-[#1a1816]/30" />
             <div className="absolute inset-0 flex items-center justify-center">
-              <p className="text-5xl font-light text-white/20 tracking-widest">7×7=49</p>
+              <p className="text-4xl md:text-5xl font-light text-[#e8e6e3]/30 tracking-widest">7×7=49</p>
             </div>
           </motion.div>
         </div>
       </section>
 
-      <section id="timeline" className="py-40 px-6 bg-[#141211]">
+      <section id="timeline" className="py-32 px-6 bg-[#141211]">
         <div className="max-w-3xl mx-auto">
           <motion.h2 
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            className="text-4xl font-light text-center mb-16"
+            className="text-3xl font-light text-center mb-16 tracking-wide"
           >
             TIMELINE
           </motion.h2>
 
-          <div className="space-y-0">
+          <div className="space-y-1">
             {timeline.map((item, i) => (
               <motion.div
                 key={i}
@@ -259,10 +216,10 @@ function App() {
                 whileInView={{ opacity: 1, x: 0 }}
                 viewport={{ once: true }}
                 transition={{ delay: i * 0.1 }}
-                className={`flex gap-6 py-5 ${item.highlight ? 'border-l-2 border-white/20 pl-6' : 'pl-8'}`}
+                className={`flex gap-6 py-4 ${item.highlight ? 'border-l-2 border-[#e8e6e3]/20 pl-6' : 'pl-8'}`}
               >
-                <div className="w-28 text-sm text-white/40 shrink-0">{item.date}</div>
-                <div className={`text-sm ${item.highlight ? 'text-white/80' : 'text-white/50'}`}>{item.event}</div>
+                <div className="w-24 text-sm text-[#e8e6e3]/40 shrink-0">{item.date}</div>
+                <div className={`text-sm ${item.highlight ? 'text-[#e8e6e3]/80' : 'text-[#e8e6e3]/50'}`}>{item.event}</div>
               </motion.div>
             ))}
           </div>
@@ -272,53 +229,48 @@ function App() {
       <section className="py-40 px-6">
         <div className="max-w-4xl mx-auto text-center">
           <motion.div
-            initial={{ opacity: 0, scale: 0.95 }}
+            initial={{ opacity: 0, scale: 0.9 }}
             whileInView={{ opacity: 1, scale: 1 }}
             viewport={{ once: true }}
+            transition={{ duration: 0.8 }}
           >
-            <p className="text-7xl md:text-9xl font-bold tracking-tight mb-6">7×7=49</p>
-            <p className="text-white/40 text-xl mb-8">Tokenized on Solana</p>
-
-            <div className="mt-8 flex justify-center">
-              <div className="w-full max-w-[550px]">
-                <div className="bg-[#1a1816] border border-white/10 rounded-xl overflow-hidden">
-                  <blockquote className="twitter-tweet" data-dnt="true" data-theme="dark">
-                    <a href="https://x.com/dilvexed/status/2040175730810876271"></a>
-                  </blockquote>
-                </div>
-              </div>
+            <p className="text-6xl md:text-8xl font-bold tracking-tight mb-8">
+              7×7=49
+            </p>
+            <p className="text-[#e8e6e3]/40 text-lg">Tokenized on Solana</p>
+            <div className="mt-6 flex justify-center">
+              <svg className="w-10 h-10 text-[#e8e6e3]/30" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M4.428 20.035c1.155 1.156 3.045 1.156 4.2 0l5.35-5.35 5.35-5.35c1.155-1.155 1.155-3.045 0-4.2-1.155-1.155-3.045-1.155-4.2 0l-4.55 4.55-1.8-1.8-4.55-4.55c-1.155-1.155-3.045-1.155-4.2 0-1.155 1.155-1.155 3.045 0 4.2l5.35 5.35-5.35 5.35c-1.155 1.155-1.155 3.045 0 4.2z"/>
+                <path d="M15.35 3.65l-5.35 5.35 4.2 4.2 5.35-5.35c.575-.575.575-1.508 0-2.083-.575-.576-1.508-.576-2.083 0l-2.117 2.117z"/>
+              </svg>
             </div>
-
-            <a 
-              href="https://www.tiktok.com/search?q=7x7%3D49&t=1776460964757" 
-              target="_blank" 
-              rel="noopener noreferrer"
-              className="inline-block mt-8 text-white/40 hover:text-white/60 transition-colors underline underline-offset-4"
-            >
-              Check 49's virality →
-            </a>
           </motion.div>
         </div>
       </section>
 
       <section className="py-20 px-6">
         <div className="max-w-2xl mx-auto">
-          <div className="bg-white/5 border border-white/10 p-8 rounded-2xl">
-            <div className="text-xs text-white/40 mb-6 tracking-widest uppercase">Token</div>
-            <div className="flex gap-3 mb-6">
-              <span className="bg-white/5 px-4 py-2 rounded-lg text-white/70">$49</span>
-              <span className="bg-white/5 px-4 py-2 rounded-lg text-white/70">SOLANA</span>
+          <motion.div 
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            className="bg-[#e8e6e3]/5 border border-[#e8e6e3]/10 p-8 rounded-xl"
+          >
+            <div className="text-xs text-[#e8e6e3]/40 mb-4 tracking-widest">TOKEN</div>
+            <div className="flex flex-wrap gap-3 mb-6">
+              <span className="bg-[#e8e6e3]/5 px-4 py-2 rounded-lg text-[#e8e6e3]/70">$49</span>
+              <span className="bg-[#e8e6e3]/5 px-4 py-2 rounded-lg text-[#e8e6e3]/70">SOLANA</span>
             </div>
-            <div className="text-xs text-white/30 mb-2">Contract Address</div>
-            <p className="text-sm font-mono text-white/50">Coming soon...</p>
-          </div>
+            <div className="text-xs text-[#e8e6e3]/30 mb-2">CONTRACT ADDRESS</div>
+            <p className="text-sm font-mono text-[#e8e6e3]/50 select-all">Coming soon...</p>
+          </motion.div>
         </div>
       </section>
 
-      <footer className="py-10 px-6 border-t border-white/5">
-        <div className="max-w-6xl mx-auto flex items-center justify-between">
-          <p className="text-xs text-white/20">7×7=49 — The Equation</p>
-          <a href="https://x.com/49onchain" target="_blank" rel="noopener noreferrer" className="text-xs text-white/30 hover:text-white">
+      <footer className="py-12 px-6 border-t border-[#e8e6e3]/5">
+        <div className="max-w-6xl mx-auto flex flex-col md:flex-row items-center justify-between gap-4">
+          <p className="text-xs text-[#e8e6e3]/20">7×7=49 — The Equation</p>
+          <a href="https://x.com/49onchain" target="_blank" rel="noopener noreferrer" className="text-xs text-[#e8e6e3]/30 hover:text-[#e8e6e3] transition-colors">
             X
           </a>
         </div>
