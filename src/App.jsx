@@ -3,7 +3,6 @@ import { motion, useScroll, useTransform } from 'framer-motion'
 
 function App() {
   const [isLoaded, setIsLoaded] = useState(false)
-  const [ca, setCa] = useState('E3mg7AXNttokah22u1WkVapkL6nAvPjoZT1pQvSXpump')
   const videoRef = useRef(null)
   const { scrollY } = useScroll()
   
@@ -15,9 +14,7 @@ function App() {
     setTimeout(() => setIsLoaded(true), 1000)
   }, [])
 
-  const copyCa = () => {
-    navigator.clipboard.writeText(ca)
-  }
+  
 
   const stats = [
     { value: "38M+", label: "Views on original" },
@@ -70,14 +67,6 @@ function App() {
             <span className="text-xl font-semibold tracking-wide text-[#e8e6e3]">$49</span>
             <span className="text-xs text-[#e8e6e3]/30 px-2 py-0.5 bg-[#e8e6e3]/5 rounded">SOL</span>
           </div>
-
-          <button 
-            onClick={copyCa}
-            className="flex items-center gap-2 px-4 py-2 bg-[#e8e6e3]/5 hover:bg-[#e8e6e3]/10 border border-[#e8e6e3]/10 rounded-lg transition-colors"
-          >
-            <span className="text-xs text-[#e8e6e3]/50 font-mono">{ca.slice(0, 8)}...{ca.slice(-8)}</span>
-            <svg className="w-4 h-4 text-[#e8e6e3]/40" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z" /></svg>
-          </button>
 
           <div className="flex items-center gap-6">
             <a href="#numbers" className="text-sm text-[#e8e6e3]/50 hover:text-[#e8e6e3] transition-colors">Numbers</a>
@@ -249,6 +238,12 @@ function App() {
               7×7=49
             </p>
             <p className="text-[#e8e6e3]/40 text-lg">Tokenized on Solana</p>
+            <div className="mt-6 flex justify-center">
+              <svg className="w-10 h-10 text-[#e8e6e3]/30" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M4.428 20.035c1.155 1.156 3.045 1.156 4.2 0l5.35-5.35 5.35-5.35c1.155-1.155 1.155-3.045 0-4.2-1.155-1.155-3.045-1.155-4.2 0l-4.55 4.55-1.8-1.8-4.55-4.55c-1.155-1.155-3.045-1.155-4.2 0-1.155 1.155-1.155 3.045 0 4.2l5.35 5.35-5.35 5.35c-1.155 1.155-1.155 3.045 0 4.2z"/>
+                <path d="M15.35 3.65l-5.35 5.35 4.2 4.2 5.35-5.35c.575-.575.575-1.508 0-2.083-.575-.576-1.508-.576-2.083 0l-2.117 2.117z"/>
+              </svg>
+            </div>
           </motion.div>
         </div>
       </section>
@@ -267,7 +262,7 @@ function App() {
               <span className="bg-[#e8e6e3]/5 px-4 py-2 rounded-lg text-[#e8e6e3]/70">SOLANA</span>
             </div>
             <div className="text-xs text-[#e8e6e3]/30 mb-2">CONTRACT ADDRESS</div>
-            <p className="text-sm font-mono text-[#e8e6e3]/50 select-all">{ca}</p>
+            <p className="text-sm font-mono text-[#e8e6e3]/50 select-all">Coming soon...</p>
           </motion.div>
         </div>
       </section>
