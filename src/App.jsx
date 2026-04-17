@@ -17,6 +17,18 @@ function App() {
       requestAnimationFrame(raf)
     }
     requestAnimationFrame(raf)
+
+    if (videoRef.current) {
+      videoRef.current.volume = 0.05
+      const fadeIn = setInterval(() => {
+        if (videoRef.current && videoRef.current.volume < 0.15) {
+          videoRef.current.volume = Math.min(videoRef.current.volume + 0.01, 0.15)
+        } else {
+          clearInterval(fadeIn)
+        }
+      }, 100)
+    }
+
     return () => lenis.destroy()
   }, [])
 
@@ -25,6 +37,9 @@ function App() {
       if (isPlaying) {
         videoRef.current.pause()
       } else {
+        if (videoRef.current.volume < 0.05) {
+          videoRef.current.volume = 0.15
+        }
         videoRef.current.play()
       }
       setIsPlaying(!isPlaying)
@@ -73,7 +88,7 @@ function App() {
           <div className="absolute inset-0 bg-gradient-to-b from-[#0d0b0a]/50 via-[#0d0b0a]/30 to-[#0d0b0a]" />
         </motion.div>
 
-        <div className="absolute inset-0 z-0 opacity-30">
+        <div className="absolute inset-0 z-0 opacity-0" style={{ animation: 'fadeInVideo 2s ease-out forwards' }}>
           <video 
             ref={videoRef}
             src="/7x7/tiktok_aascinema_7628095588139126049.mp4"
