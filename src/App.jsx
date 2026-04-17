@@ -30,6 +30,13 @@ function App() {
     { date: "NOW", event: "7×7=49. The equation wins. Always has." }
   ]
 
+  const scrollToSection = (id) => {
+    const element = document.getElementById(id)
+    if (element) {
+      element.scrollIntoView({ behavior: 'smooth' })
+    }
+  }
+
   return (
     <div className="min-h-screen bg-[#1a1816] text-[#e8e6e3] font-sans overflow-x-hidden">
       <motion.div 
@@ -68,22 +75,22 @@ function App() {
         <img src="/7x7/Screenshot 2026-04-17 234716.png" alt="" className="w-full h-full object-cover" />
       </motion.div>
 
-      <nav className="fixed top-0 left-0 right-0 z-50 py-4 px-6 bg-[#1a1816]/90 backdrop-blur-md border-b border-[#e8e6e3]/5">
+      <div className="fixed top-0 left-0 right-0 z-50 py-4 px-6 bg-[#1a1816]/90 backdrop-blur-md border-b border-[#e8e6e3]/5">
         <div className="max-w-6xl mx-auto flex items-center justify-between gap-4">
-          <div className="flex items-center gap-4">
+          <div className="flex items-center gap-4 cursor-pointer" onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}>
             <span className="text-xl font-semibold tracking-wide text-[#e8e6e3]">$49</span>
             <span className="text-xs text-[#e8e6e3]/30 px-2 py-0.5 bg-[#e8e6e3]/5 rounded">SOL</span>
           </div>
 
           <div className="flex items-center gap-6">
-            <a href="#numbers" className="text-sm text-[#e8e6e3]/50 hover:text-[#e8e6e3] transition-colors">Numbers</a>
-            <a href="#timeline" className="text-sm text-[#e8e6e3]/50 hover:text-[#e8e6e3] transition-colors">Timeline</a>
+            <button onClick={() => scrollToSection('numbers')} className="text-sm text-[#e8e6e3]/50 hover:text-[#e8e6e3] transition-colors bg-transparent border-none cursor-pointer">Numbers</button>
+            <button onClick={() => scrollToSection('timeline')} className="text-sm text-[#e8e6e3]/50 hover:text-[#e8e6e3] transition-colors bg-transparent border-none cursor-pointer">Timeline</button>
             <a href="https://x.com/49onchain" target="_blank" rel="noopener noreferrer" className="text-sm text-[#e8e6e3]/40 hover:text-[#e8e6e3] transition-colors flex items-center gap-1">
               <svg viewBox="0 0 24 24" className="w-4 h-4" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
             </a>
           </div>
         </div>
-      </nav>
+      </div>
 
       <section className="relative h-screen flex items-center justify-center overflow-hidden">
         <motion.div style={{ y: y1 }} className="absolute inset-0 pointer-events-none">
@@ -246,19 +253,10 @@ function App() {
             </p>
             <p className="text-[#e8e6e3]/40 text-lg">Tokenized on Solana</p>
             <div className="mt-6 flex justify-center">
-              <svg className="w-10 h-10 text-[#e8e6e3]/30" viewBox="0 0 24 24" fill="currentColor">
-                <path d="M4.428 20.035c1.155 1.156 3.045 1.156 4.2 0l5.35-5.35 5.35-5.35c1.155-1.155 1.155-3.045 0-4.2-1.155-1.155-3.045-1.155-4.2 0l-4.55 4.55-1.8-1.8-4.55-4.55c-1.155-1.155-3.045-1.155-4.2 0-1.155 1.155-1.155 3.045 0 4.2l5.35 5.35-5.35 5.35c-1.155 1.155-1.155 3.045 0 4.2z"/>
-                <path d="M15.35 3.65l-5.35 5.35 4.2 4.2 5.35-5.35c.575-.575.575-1.508 0-2.083-.575-.576-1.508-.576-2.083 0l-2.117 2.117z"/>
+              <svg className="w-12 h-12 text-[#e8e6e3]/30" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M11.752 2.94c.322.18.714.18 1.036 0l4.85 2.8c.322.186.322.488 0 .674l-4.85 2.8c-.322.186-.714.186-1.036 0l-4.85-2.8c-.322-.186-.322-.488 0-.674l4.85-2.8zM17.322 3.576c.322-.186.322-.488 0-.674l-4.85-2.8c-.322-.186-.714-.186-1.036 0l-4.85 2.8c-.322.186-.322.488 0 .674l4.85 2.8c.322.186.714.186 1.036 0l4.85-2.8zM6.678 20.424c.322.18.714.18 1.036 0l4.85-2.8c.322-.186.322-.488 0-.674l-4.85-2.8c-.322-.186-.714-.186-1.036 0l-4.85 2.8c-.322.186-.322.488 0 .674l4.85 2.8zM6.678 3.576c-.322.186-.714.186-1.036 0l-4.85 2.8c-.322.186-.322.488 0 .674l4.85 2.8c.322.186.714.186 1.036 0l4.85-2.8c.322-.186.322-.488 0-.674l-4.85-2.8z"/>
               </svg>
             </div>
-            <a 
-              href="https://www.tiktok.com/search?q=7x7%3D49&t=1776460964757" 
-              target="_blank" 
-              rel="noopener noreferrer"
-              className="inline-block mt-4 text-sm text-[#e8e6e3]/40 hover:text-[#e8e6e3]/60 transition-colors underline underline-offset-4"
-            >
-              Check 49's virality
-            </a>
           </motion.div>
         </div>
       </section>
@@ -293,9 +291,24 @@ function App() {
             THE VIRAL POST
           </motion.h2>
           <div className="flex justify-center">
-            <blockquote className="twitter-tweet" data-dnt="true">
-              <a href="https://x.com/dilvexed/status/2040175730810876271?ref_src=twsrc%5Etfw"></a>
-            </blockquote>
+            <a 
+              href="https://x.com/dilvexed/status/2040175730810876271" 
+              target="_blank" 
+              rel="noopener noreferrer"
+              className="block max-w-[550px] bg-[#e8e6e3]/5 border border-[#e8e6e3]/10 rounded-xl p-4 hover:bg-[#e8e6e3]/8 transition-colors"
+            >
+              <div className="flex items-center gap-3 mb-3">
+                <div className="w-10 h-10 bg-[#e8e6e3]/20 rounded-full flex items-center justify-center">
+                  <svg className="w-5 h-5 text-[#e8e6e3]/60" viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+                </div>
+                <div>
+                  <p className="text-sm font-semibold text-[#e8e6e3]">dilvexed</p>
+                  <p className="text-xs text-[#e8e6e3]/40">@dilvexed</p>
+                </div>
+              </div>
+              <p className="text-[#e8e6e3]/80 text-lg mb-3">why is 7×7=49 so fucking hot</p>
+              <p className="text-xs text-[#e8e6e3]/40">69K likes · April 3, 2026</p>
+            </a>
           </div>
         </div>
       </section>
@@ -308,8 +321,6 @@ function App() {
           </a>
         </div>
       </footer>
-
-      <script async src="https://platform.twitter.com/widgets.js" charSet="utf-8"></script>
     </div>
   )
 }
