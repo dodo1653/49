@@ -21,8 +21,3 @@ a {
 img {
   max-width: 100%;
 }
-
-@keyframes fadeInVideo {
-  from { opacity: 0; }
-  to { opacity: 0.3; }
-}

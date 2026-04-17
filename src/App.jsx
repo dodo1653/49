@@ -1,11 +1,10 @@
-import { useEffect, useRef, useState } from 'react'
+import { useEffect, useRef } from 'react'
 import { motion, useScroll, useTransform } from 'framer-motion'
 import Lenis from 'lenis'
 
 function App() {
   const videoRef = useRef(null)
   const { scrollY } = useScroll()
-  const [isPlaying, setIsPlaying] = useState(true)
   
   const y1 = useTransform(scrollY, [0, 1000], [0, 100])
   const heroOpacity = useTransform(scrollY, [0, 400], [1, 0])
@@ -17,34 +16,8 @@ function App() {
       requestAnimationFrame(raf)
     }
     requestAnimationFrame(raf)
-
-    if (videoRef.current) {
-      videoRef.current.volume = 0.05
-      const fadeIn = setInterval(() => {
-        if (videoRef.current && videoRef.current.volume < 0.15) {
-          videoRef.current.volume = Math.min(videoRef.current.volume + 0.01, 0.15)
-        } else {
-          clearInterval(fadeIn)
-        }
-      }, 100)
-    }
-
     return () => lenis.destroy()
   }, [])
-
-  const toggleAudio = () => {
-    if (videoRef.current) {
-      if (isPlaying) {
-        videoRef.current.pause()
-      } else {
-        if (videoRef.current.volume < 0.05) {
-          videoRef.current.volume = 0.15
-        }
-        videoRef.current.play()
-      }
-      setIsPlaying(!isPlaying)
-    }
-  }
 
   return (
     <div className="min-h-screen bg-[#0d0b0a] text-[#e8e6e3] font-sans selection:bg-white/10">
@@ -57,22 +30,14 @@ function App() {
             <span>$49</span>
             <span className="text-xs text-white/30 px-1.5 py-0.5 bg-white/5 rounded">SOL</span>
           </button>
-          <div className="flex items-center gap-4">
-            <button 
-              onClick={toggleAudio}
-              className="text-sm text-white/40 hover:text-white/70 transition-colors"
-            >
-              {isPlaying ? '🔊' : '🔇'}
-            </button>
-            <a 
-              href="https://x.com/49onchain" 
-              target="_blank" 
-              rel="noopener noreferrer"
-              className="text-sm text-white/40 hover:text-white/70 transition-colors"
-            >
-              X
-            </a>
-          </div>
+          <a 
+            href="https://x.com/49onchain" 
+            target="_blank" 
+            rel="noopener noreferrer"
+            className="text-sm text-white/40 hover:text-white/70 transition-colors"
+          >
+            X
+          </a>
         </div>
       </nav>
 
@@ -88,12 +53,13 @@ function App() {
           <div className="absolute inset-0 bg-gradient-to-b from-[#0d0b0a]/50 via-[#0d0b0a]/30 to-[#0d0b0a]" />
         </motion.div>
 
-        <div className="absolute inset-0 z-0 opacity-0" style={{ animation: 'fadeInVideo 2s ease-out forwards' }}>
+        <div className="absolute inset-0 z-0 opacity-30">
           <video 
             ref={videoRef}
             src="/7x7/tiktok_aascinema_7628095588139126049.mp4"
             className="w-full h-full object-cover mix-blend-overlay grayscale"
             autoPlay
+            muted
             loop
             playsInline
           />
