@@ -1,13 +1,8 @@
 import { useEffect, useRef } from 'react'
-import { motion, useScroll, useTransform } from 'framer-motion'
 import Lenis from 'lenis'
 
 function App() {
   const videoRef = useRef(null)
-  const { scrollY } = useScroll()
-  
-  const y1 = useTransform(scrollY, [0, 1000], [0, 100])
-  const heroOpacity = useTransform(scrollY, [0, 400], [1, 0])
 
   useEffect(() => {
     const lenis = new Lenis()
@@ -42,7 +37,7 @@ function App() {
       </nav>
 
       <section className="relative h-screen flex items-center justify-center overflow-hidden">
-        <motion.div style={{ y: y1 }} className="absolute inset-0 pointer-events-none">
+        <div className="absolute inset-0 pointer-events-none">
           <div className="absolute inset-0">
             <img 
               src="/7x7/Screenshot 2026-04-17 234716.png" 
@@ -51,7 +46,7 @@ function App() {
             />
           </div>
           <div className="absolute inset-0 bg-gradient-to-b from-[#0d0b0a]/50 via-[#0d0b0a]/30 to-[#0d0b0a]" />
-        </motion.div>
+        </div>
 
         <div className="absolute inset-0 z-0 opacity-30">
           <video 
@@ -71,46 +66,25 @@ function App() {
         </div>
 
         <div className="relative z-10 text-center px-6 max-w-5xl -mt-16">
-          <motion.h1 
-            initial={{ opacity: 0, y: 80 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 1, ease: [0.16, 1, 0.3, 1] }}
-            className="text-8xl md:text-[7rem] lg:text-[9rem] font-bold tracking-tighter text-white mb-2"
-          >
+          <h1 className="text-8xl md:text-[7rem] lg:text-[9rem] font-bold tracking-tighter text-white mb-2 opacity-0 animate-fade-in" style={{ animationDelay: '0.2s' }}>
             7×7=49
-          </motion.h1>
+          </h1>
           
-          <motion.p 
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ delay: 0.3, duration: 0.8 }}
-            className="text-xl md:text-2xl text-white/40 font-light tracking-wide"
-          >
+          <p className="text-xl md:text-2xl text-white/40 font-light tracking-wide opacity-0 animate-fade-in" style={{ animationDelay: '0.5s' }}>
             The equation that will steal your girl
-          </motion.p>
+          </p>
 
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.6, duration: 0.6 }}
-            className="mt-16"
-          >
+          <div className="mt-16 opacity-0 animate-fade-in" style={{ animationDelay: '0.8s' }}>
             <div className="inline-flex items-center gap-4 px-6 py-3 bg-white/5 backdrop-blur-sm rounded-full border border-white/8">
               <span className="w-2 h-2 bg-white/60 rounded-full" />
               <span className="text-sm text-white/50 font-mono tracking-wide">38M+ views across platforms</span>
             </div>
-          </motion.div>
+          </div>
         </div>
 
-        <motion.div style={{ opacity: heroOpacity }} className="absolute bottom-12 left-1/2 -translate-x-1/2 z-10">
-          <motion.div 
-            animate={{ y: [0, 12, 0] }} 
-            transition={{ duration: 2, repeat: Infinity }}
-            className="text-white/20 text-2xl"
-          >
-            ↓
-          </motion.div>
-        </motion.div>
+        <div className="absolute bottom-12 left-1/2 -translate-x-1/2 z-10 opacity-0 animate-fade-in" style={{ animationDelay: '1.2s' }}>
+          <div className="text-white/20 text-2xl">↓</div>
+        </div>
       </section>
 
       <section className="py-24 px-6">
