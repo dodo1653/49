@@ -3,7 +3,7 @@ import { motion, useScroll, useTransform } from 'framer-motion'
 
 function App() {
   const [isLoaded, setIsLoaded] = useState(false)
-  const [ca, setCa] = useState('')
+  const [ca, setCa] = useState('E3mg7AXNttokah22u1WkVapkL6nAvPjoZT1pQvSXpump')
   const videoRef = useRef(null)
   const { scrollY } = useScroll()
   
@@ -14,6 +14,10 @@ function App() {
   useEffect(() => {
     setTimeout(() => setIsLoaded(true), 1000)
   }, [])
+
+  const copyCa = () => {
+    navigator.clipboard.writeText(ca)
+  }
 
   const stats = [
     { value: "38M+", label: "Views on original" },
@@ -30,12 +34,6 @@ function App() {
     { date: "April 6, 2026", event: "@trevorlarcom posts 'caught her looking at 7×7=49' - 210K views" },
     { date: "NOW", event: "7×7=49. The equation wins. Always has." }
   ]
-
-  const formatCa = (value) => {
-    if (!value) return ''
-    if (value.length <= 44) return value
-    return value.slice(0, 44)
-  }
 
   return (
     <div className="min-h-screen bg-[#1a1816] text-[#e8e6e3] font-sans overflow-x-hidden">
@@ -68,22 +66,20 @@ function App() {
         className="fixed top-0 left-0 right-0 z-50 py-4 px-6 bg-[#1a1816]/90 backdrop-blur-md border-b border-[#e8e6e3]/5"
       >
         <div className="max-w-6xl mx-auto flex items-center justify-between gap-4">
-          <div className="flex items-center gap-4 shrink-0">
+          <div className="flex items-center gap-4">
             <span className="text-xl font-semibold tracking-wide text-[#e8e6e3]">$49</span>
             <span className="text-xs text-[#e8e6e3]/30 px-2 py-0.5 bg-[#e8e6e3]/5 rounded">SOL</span>
           </div>
 
-          <div className="flex-1 max-w-md">
-            <input
-              type="text"
-              placeholder="Paste CA here..."
-              value={ca}
-              onChange={(e) => setCa(formatCa(e.target.value))}
-              className="w-full bg-[#e8e6e3]/5 border border-[#e8e6e3]/10 rounded-lg px-4 py-2 text-sm text-[#e8e6e3] placeholder:text-[#e8e6e3]/30 focus:outline-none focus:border-[#e8e6e3]/30 transition-colors text-center font-mono"
-            />
-          </div>
+          <button 
+            onClick={copyCa}
+            className="flex items-center gap-2 px-4 py-2 bg-[#e8e6e3]/5 hover:bg-[#e8e6e3]/10 border border-[#e8e6e3]/10 rounded-lg transition-colors"
+          >
+            <span className="text-xs text-[#e8e6e3]/50 font-mono">{ca.slice(0, 8)}...{ca.slice(-8)}</span>
+            <svg className="w-4 h-4 text-[#e8e6e3]/40" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z" /></svg>
+          </button>
 
-          <div className="flex items-center gap-6 shrink-0">
+          <div className="flex items-center gap-6">
             <a href="#numbers" className="text-sm text-[#e8e6e3]/50 hover:text-[#e8e6e3] transition-colors">Numbers</a>
             <a href="#timeline" className="text-sm text-[#e8e6e3]/50 hover:text-[#e8e6e3] transition-colors">Timeline</a>
             <a href="https://x.com/49onchain" target="_blank" rel="noopener noreferrer" className="text-sm text-[#e8e6e3]/40 hover:text-[#e8e6e3] transition-colors flex items-center gap-1">
@@ -271,7 +267,7 @@ function App() {
               <span className="bg-[#e8e6e3]/5 px-4 py-2 rounded-lg text-[#e8e6e3]/70">SOLANA</span>
             </div>
             <div className="text-xs text-[#e8e6e3]/30 mb-2">CONTRACT ADDRESS</div>
-            <p className="text-sm font-mono text-[#e8e6e3]/50 select-all">{ca || 'Coming soon...'}</p>
+            <p className="text-sm font-mono text-[#e8e6e3]/50 select-all">{ca}</p>
           </motion.div>
         </div>
       </section>
