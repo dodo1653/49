@@ -14,8 +14,6 @@ function App() {
     setTimeout(() => setIsLoaded(true), 1000)
   }, [])
 
-  
-
   const stats = [
     { value: "38M+", label: "Views on original" },
     { value: "69K+", label: "Likes on viral post" },
@@ -38,14 +36,28 @@ function App() {
         initial={{ opacity: 1 }}
         animate={{ opacity: isLoaded ? 0 : 1 }}
         transition={{ duration: 0.8 }}
-        className="fixed inset-0 z-[2000] bg-[#1a1816] flex items-center justify-center"
+        className="fixed inset-0 z-[2000] bg-[#1a1816] flex items-center justify-center overflow-hidden"
       >
+        <div className="absolute inset-0">
+          <img 
+            src="/7x7/image.png" 
+            alt="" 
+            className="w-full h-full object-cover opacity-30 scale-110"
+          />
+          <div className="absolute inset-0 bg-[#1a1816]/50" />
+        </div>
         <motion.div
-          animate={{ opacity: [0.3, 1, 0.3], scale: [1, 1.05, 1] }}
-          transition={{ duration: 2, repeat: Infinity }}
-          className="text-5xl font-bold tracking-widest text-[#e8e6e3]/80"
+          initial={{ scale: 0.8, opacity: 0 }}
+          animate={{ scale: 1, opacity: 1 }}
+          transition={{ duration: 0.5 }}
+          className="relative z-10 text-center"
         >
-          7×7=49
+          <p className="text-5xl md:text-7xl font-bold tracking-widest text-[#e8e6e3]/80">7×7=49</p>
+          <motion.div 
+            animate={{ width: ["0%", "100%"] }}
+            transition={{ duration: 1.5, delay: 0.5 }}
+            className="h-px bg-[#e8e6e3]/30 mx-auto mt-6 max-w-xs"
+          />
         </motion.div>
       </motion.div>
 
@@ -56,12 +68,7 @@ function App() {
         <img src="/7x7/Screenshot 2026-04-17 234716.png" alt="" className="w-full h-full object-cover" />
       </motion.div>
 
-      <motion.nav 
-        initial={{ y: -100 }}
-        animate={{ y: 0 }}
-        transition={{ delay: 0.5, duration: 0.6 }}
-        className="fixed top-0 left-0 right-0 z-50 py-4 px-6 bg-[#1a1816]/90 backdrop-blur-md border-b border-[#e8e6e3]/5"
-      >
+      <nav className="fixed top-0 left-0 right-0 z-50 py-4 px-6 bg-[#1a1816]/90 backdrop-blur-md border-b border-[#e8e6e3]/5">
         <div className="max-w-6xl mx-auto flex items-center justify-between gap-4">
           <div className="flex items-center gap-4">
             <span className="text-xl font-semibold tracking-wide text-[#e8e6e3]">$49</span>
@@ -76,7 +83,7 @@ function App() {
             </a>
           </div>
         </div>
-      </motion.nav>
+      </nav>
 
       <section className="relative h-screen flex items-center justify-center overflow-hidden">
         <motion.div style={{ y: y1 }} className="absolute inset-0 pointer-events-none">
@@ -244,6 +251,14 @@ function App() {
                 <path d="M15.35 3.65l-5.35 5.35 4.2 4.2 5.35-5.35c.575-.575.575-1.508 0-2.083-.575-.576-1.508-.576-2.083 0l-2.117 2.117z"/>
               </svg>
             </div>
+            <a 
+              href="https://www.tiktok.com/search?q=7x7%3D49&t=1776460964757" 
+              target="_blank" 
+              rel="noopener noreferrer"
+              className="inline-block mt-4 text-sm text-[#e8e6e3]/40 hover:text-[#e8e6e3]/60 transition-colors underline underline-offset-4"
+            >
+              Check 49's virality
+            </a>
           </motion.div>
         </div>
       </section>
@@ -267,6 +282,24 @@ function App() {
         </div>
       </section>
 
+      <section className="py-20 px-6 bg-[#141211]">
+        <div className="max-w-3xl mx-auto">
+          <motion.h2 
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            className="text-2xl font-light text-center mb-12 text-[#e8e6e3]/60"
+          >
+            THE VIRAL POST
+          </motion.h2>
+          <div className="flex justify-center">
+            <blockquote className="twitter-tweet" data-dnt="true">
+              <a href="https://x.com/dilvexed/status/2040175730810876271?ref_src=twsrc%5Etfw"></a>
+            </blockquote>
+          </div>
+        </div>
+      </section>
+
       <footer className="py-12 px-6 border-t border-[#e8e6e3]/5">
         <div className="max-w-6xl mx-auto flex flex-col md:flex-row items-center justify-between gap-4">
           <p className="text-xs text-[#e8e6e3]/20">7×7=49 — The Equation</p>
@@ -275,6 +308,8 @@ function App() {
           </a>
         </div>
       </footer>
+
+      <script async src="https://platform.twitter.com/widgets.js" charSet="utf-8"></script>
     </div>
   )
 }
