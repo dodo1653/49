@@ -1,88 +1,188 @@
-import { useEffect } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import Lenis from 'lenis'
 
 function App() {
+  const videoRef = useRef(null)
+  const [scrollProgress, setScrollProgress] = useState(0)
+  const [loaded, setLoaded] = useState(false)
+
   useEffect(() => {
-    const lenis = new Lenis()
+    const lenis = new Lenis({
+      duration: 1.2,
+      easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t))
+    })
+
     function raf(time) {
       lenis.raf(time)
       requestAnimationFrame(raf)
     }
+
     requestAnimationFrame(raf)
+
+    lenis.on('scroll', ({ progress }) => {
+      setScrollProgress(progress)
+    })
+
+    setTimeout(() => setLoaded(true), 500)
+
     return () => lenis.destroy()
   }, [])
 
+  const sections = [
+    { id: 'hero', title: 'I build', subtitle: 'websites for trenchers' },
+    { id: 'focus', title: 'pump.fun', subtitle: 'focused. built fast.' },
+    { id: 'price', title: '0.5', subtitle: 'SOL' },
+    { id: 'contact', title: 'discord', subtitle: '@dazzox' }
+  ]
+
   return (
-    <div className="min-h-screen bg-[#0B0B0B] text-white font-sans">
+    <div className="bg-[#0B0B0B] text-white min-h-screen overflow-hidden">
       <style>{`
-        @import url('https://fonts.googleapis.com/css2?family=Sora:wght@300;400;500;600;700&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&display=swap');
         
         * { margin: 0; padding: 0; box-sizing: border-box; }
-        body { font-family: 'Sora', sans-serif; background: #0B0B0B; color: white; }
-        a { text-decoration: none; color: inherit; }
         
-        .fade { animation: fadeIn 1s ease forwards; opacity: 0; }
-        @keyframes fadeIn { to { opacity: 1; } }
-        
-        .delay-1 { animation-delay: 0.1s; }
-        .delay-2 { animation-delay: 0.2s; }
-        .delay-3 { animation-delay: 0.3s; }
-        
-        ::-webkit-scrollbar { width: 3px; }
+        body {
+          font-family: 'Syne', sans-serif;
+          background: #0B0B0B;
+          color: white;
+          overflow-x: hidden;
+        }
+
+        .reveal {
+          opacity: 0;
+          transform: translateY(80px);
+          transition: all 1s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .reveal.active {
+          opacity: 1;
+          transform: translateY(0);
+        }
+
+        .reveal-delay-1 { transition-delay: 0.1s; }
+        .reveal-delay-2 { transition-delay: 0.2s; }
+        .reveal-delay-3 { transition-delay: 0.3s; }
+        .reveal-delay-4 { transition-delay: 0.4s; }
+
+        .progress-bar {
+          position: fixed;
+          top: 0;
+          left: 0;
+          height: 2px;
+          background: linear-gradient(90deg, #fff 0%, #666 100%);
+          z-index: 1000;
+          transition: width 0.1s ease-out;
+        }
+
+        .noise {
+          position: fixed;
+          inset: 0;
+          pointer-events: none;
+          opacity: 0.03;
+          z-index: 999;
+          background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+        }
+
+        .glow {
+          text-shadow: 0 0 60px rgba(255,255,255,0.3);
+        }
+
+        ::-webkit-scrollbar { width: 1px; }
         ::-webkit-scrollbar-track { background: #0B0B0B; }
         ::-webkit-scrollbar-thumb { background: #333; }
       `}</style>
 
-      <nav className="fixed top-0 left-0 w-full py-8 px-12 flex justify-between items-center z-50">
-        <a href="#" className="text-lg font-semibold tracking-tight hover:opacity-50 transition-opacity">
-          dzzox
-        </a>
-        <a href="#contact" className="text-sm text-white/40 hover:text-white transition-colors">
-          contact
+      <div className="progress-bar" style={{ width: `${scrollProgress * 100}%` }} />
+      <div className="noise" />
+
+      <nav className="fixed top-0 left-0 w-full px-12 py-8 flex justify-between items-center z-50 mix-blend-difference">
+        <span className={`text-sm font-semibold tracking-widest transition-all duration-1000 ${loaded ? 'opacity-100' : 'opacity-0'}`}>
+          DZZOX
+        </span>
+        <a 
+          href="https://discordapp.com/users/dazzox"
+          target="_blank"
+          rel="noopener noreferrer"
+          className={`text-sm text-white/50 hover:text-white transition-all duration-1000 ${loaded ? 'opacity-100' : 'opacity-0'}`}
+        >
+          CONTACT
         </a>
       </nav>
 
-      <main className="min-h-screen flex items-center justify-center px-8">
-        <div className="max-w-3xl text-center">
-          <h1 className="text-6xl md:text-8xl font-bold tracking-tight mb-8 fade delay-1">
-            I build
-          </h1>
-          <h1 className="text-6xl md:text-8xl font-bold tracking-tight mb-8 fade delay-2">
-            websites
-          </h1>
-          <h1 className="text-6xl md:text-8xl font-bold tracking-tight mb-8 fade delay-3">
-            for trenchers
-          </h1>
-          
-          <p className="text-xl md:text-2xl text-white/50 font-light tracking-wide mt-16 fade delay-3">
-            pump.fun focused. Built fast.
-          </p>
-
-          <div className="mt-8 fade delay-3">
-            <span className="text-5xl font-bold">0.5</span>
-            <span className="text-xl text-white/40 ml-3">SOL</span>
-          </div>
-        </div>
-      </main>
-
-      <footer id="contact" className="py-12 px-12">
-        <div className="flex justify-center items-center gap-8">
-          <a 
-            href="https://discordapp.com/users/dazzox" 
-            target="_blank" 
-            rel="noopener noreferrer"
-            className="flex items-center gap-3 text-white/40 hover:text-white transition-colors"
+      <section className="relative h-screen w-full flex items-center justify-center overflow-hidden">
+        <div className="absolute inset-0 opacity-15">
+          <video
+            ref={videoRef}
+            autoPlay
+            muted
+            loop
+            playsInline
+            className="w-full h-full object-cover grayscale"
           >
-            <svg className="w-6 h-6" viewBox="0 0 24 24" fill="currentColor">
-              <path d="M20.317 4.37a19.791 19.791 0 0 0-4.885-1.515.074.074 0 0 0-.079.037c-.21.375-.444.864-.608 1.25a18.27 18.27 0 0 0-5.487 0 12.64 12.64 0 0 0-.613-1.25.077.077 0 0 0-.079-.037A19.736 19.736 0 0 0 3.677 4.37a.07.07 0 0 0-.032.027C.533 9.046-.32 13.58.099 18.057a.082.082 0 0 0 .031.057 19.9 19.9 0 0 0 5.993 3.03.078.078 0 0 0 .084-.028 12.935 12.935 0 0 0 1.381-1.277.074.074 0 0 0-.078-.039 12.508 12.508 0 0 1-1.872.892.077.077 0 0 0-.079.038c.21.528.599.889 1.279 1.249a.074.074 0 0 0 .079.038 19.741 19.741 0 0 1 4.708.001.073.073 0 0 0 .079-.039 12.473 12.473 0 0 1 1.272-.887.074.074 0 0 0 .079-.04c.463.63 1.015 1.159 1.631 1.567a.078.078 0 0 0 .083-.055c.462-.794.972-1.551 1.526-2.257a.076.076 0 0 0-.035-.1zM8.02 15.33c-1.183 0-2.157-1.085-2.157-2.419 0-1.333.956-2.419 2.157-2.419 1.21 0 2.176 1.096 2.157 2.42 0 1.333-.956 2.418-2.157 2.418zm7.975 0c-1.183 0-2.157-1.085-2.157-2.419 0-1.333.955-2.419 2.157-2.419 1.21 0 2.176 1.096 2.157 2.42 0 1.333-.955 2.418-2.157 2.418z"/>
-            </svg>
-            <span>dazzox</span>
-          </a>
-          
-          <span className="text-white/20">|</span>
-          
-          <p className="text-white/20 text-sm">dzzox</p>
+            <source src="https://ipfs.io/ipfs/QmXoypizjW3WknFiJnKLwHCnL72vedxjQkDDP1mXWo6uco/pump.mp4" type="video/mp4" />
+          </video>
+          <div className="absolute inset-0 bg-gradient-to-b from-[#0B0B0B] via-transparent to-[#0B0B0B]" />
         </div>
+
+        <div className="relative z-10 text-center">
+          <h1 className={`text-[12vw] leading-[0.85] font-bold tracking-tighter glow transition-all duration-1000 ${loaded ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
+            I BUILD
+          </h1>
+          <h1 className={`text-[12vw] leading-[0.85] font-bold tracking-tighter glow transition-all duration-1000 delay-100 ${loaded ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
+            WEBSITES
+          </h1>
+          <h1 className={`text-[12vw] leading-[0.85] font-bold tracking-tighter glow transition-all duration-1000 delay-200 ${loaded ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
+            FOR TRENCHERS
+          </h1>
+        </div>
+
+        <div className={`absolute bottom-12 left-1/2 -translate-x-1/2 transition-all duration-1000 delay-300 ${loaded ? 'opacity-100' : 'opacity-0'}`}>
+          <div className="text-white/20 text-xs tracking-[0.3em] animate-pulse">SCROLL</div>
+        </div>
+      </section>
+
+      <section className="h-screen w-full flex items-center justify-center">
+        <div className="text-center">
+          <h2 className={`text-[8vw] leading-none font-bold tracking-tight reveal ${loaded ? 'active' : ''}`}>
+            PUMP.FUN
+          </h2>
+          <p className={`text-xl text-white/40 mt-8 tracking-widest reveal reveal-delay-1 ${loaded ? 'active' : ''}`}>
+            FOCUSED. BUILT FAST.
+          </p>
+        </div>
+      </section>
+
+      <section className="h-screen w-full flex items-center justify-center">
+        <div className="text-center">
+          <div className={`text-[15vw] leading-none font-bold tracking-tighter reveal ${loaded ? 'active' : ''}`}>
+            0.5
+          </div>
+          <p className={`text-4xl text-white/30 tracking-widest reveal reveal-delay-1 ${loaded ? 'active' : ''}`}>
+            SOL
+          </p>
+        </div>
+      </section>
+
+      <section className="h-[70vh] w-full flex items-center justify-center">
+        <div className="text-center">
+          <a 
+            href="https://discordapp.com/users/dazzox"
+            target="_blank"
+            rel="noopener noreferrer"
+            className={`text-[6vw] leading-none font-bold tracking-tight hover:text-white/50 transition-colors reveal ${loaded ? 'active' : ''}`}
+          >
+            CONTACT
+          </a>
+          <p className={`text-xl text-white/40 mt-4 reveal reveal-delay-1 ${loaded ? 'active' : ''}`}>
+            @dazzox
+          </p>
+        </div>
+      </section>
+
+      <footer className="py-12 px-12 flex justify-between items-center border-t border-white/5">
+        <span className="text-white/20 text-xs tracking-widest">DZZOX</span>
+        <span className="text-white/20 text-xs tracking-widest">© 2025</span>
       </footer>
     </div>
   )
